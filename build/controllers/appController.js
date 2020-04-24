@@ -178,8 +178,12 @@ class AppController {
     //obtener usuario-administrador en panel, retorna los datos del usuario y el nombre de la pyme asociada, requiere el id del usuario
     getUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            return res.json({
+                text: "paso la vola xd"
+            });
+
             console.log('getusuario metodo en node');
-            const usuario = yield database_1.default.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `usuario-administrador` AS u INNER JOIN `pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
+            const usuario = yield database_1.default.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `Usuario-Administrador` AS u INNER JOIN `pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
             console.log('usuario= ' + usuario);
             if (usuario.length > 0) {
                 return res.json(usuario[0]);
