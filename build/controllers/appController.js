@@ -151,15 +151,15 @@ class AppController {
             console.log("consulta a la db por correo y password");
             const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `Usuario-Administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
-            res.json (
-                admin[0]
-            )
+            // res.json (
+            //     admin[0]
+            // )
 
-            //    Admin = admin[0]
-            //    console.log('admin Admin= ' + Admin)
-            //    console.log('admin Admin= ' + Admin.NombreUsuario)
-            //    const token = jwt.sign({ _id: Admin.idUsuario }, 'secretkey')
-            //    return res.status(200).json({ Admin, token })
+               Admin = admin[0]
+               console.log('admin Admin= ' + Admin)
+               console.log('admin Admin= ' + Admin.NombreUsuario)
+               const token = jwt.sign({ _id: Admin.idUsuario }, 'secretkey')
+               return res.json({ Admin, token })
             }
             else {
                 //res.json({message:'password incorrecta'});
