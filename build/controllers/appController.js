@@ -151,9 +151,7 @@ class AppController {
             console.log("consulta a la db por correo y password");
             const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `Usuario-Administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
-                res.json({
-                    admin
-                });
+                res.json(admin[0])
             }
             else {
                 //res.json({message:'password incorrecta'});
