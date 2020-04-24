@@ -20,7 +20,7 @@ const fs = require('fs');
 class AppController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield database_1.default.query('SELECT * FROM `pyme`,`usuario-administrador`');
+            const data = yield database_1.default.query('SELECT * FROM `pyme`,`Usuario-Administrador`');
             res.json(data);
         });
     }
@@ -65,8 +65,8 @@ class AppController {
             const { idUsuario } = req.body;
             console.log(idUsuario);
             console.log(req.body);
-            yield database_1.default.query('UPDATE `usuario-administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
-            console.log('UPDATE `usuario-administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
+            yield database_1.default.query('UPDATE `Usuario-Administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
+            console.log('UPDATE `Usuario-Administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
             res.json(req.body);
         });
     }
@@ -160,7 +160,7 @@ class AppController {
                 idPyme: 0
             };
             console.log("consulta a la db por correo y password");
-            const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `usuario-administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
+            const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `Usuario-Administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
                 Admin = admin[0];
                 console.log('admin Admin= ' + Admin);
@@ -191,7 +191,7 @@ class AppController {
     getPyme(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('getpyme metodo en node');
-            const pyme = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `usuario-administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
+            const pyme = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `Usuario-Administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
             if (pyme.length > 0) {
                 return res.json(pyme[0]);
             }
@@ -282,7 +282,7 @@ class AppController {
     getTiposServiciosbyRubro(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('getTiposServiciosbyRubro metodo en node');
-            const tiposServicios = yield database_1.default.query('SELECT t.* FROM `usuario-administrador` as u inner join `pyme`as p ON u.Pyme_idPyme = p.idPyme inner join `tipos-servicios-productos` as t on p.Rubro_idRubro=t.idRubro where u.idUsuario = ?', [req.params.id]);
+            const tiposServicios = yield database_1.default.query('SELECT t.* FROM `Usuario-Administrador` as u inner join `pyme`as p ON u.Pyme_idPyme = p.idPyme inner join `tipos-servicios-productos` as t on p.Rubro_idRubro=t.idRubro where u.idUsuario = ?', [req.params.id]);
             console.log('tipos de Servicios= ' + tiposServicios);
             res.json(tiposServicios);
         });
