@@ -163,7 +163,7 @@ class AppController {
             //     )
             //     return    
                 const token = jsonwebtoken_1.default.sign({ _id: Admin.idUsuario }, 'secretkey');
-               res.json(token)
+                return res.status(200).json({ Admin, token });
             //    return res.json({ Admin, token })
 
                 
