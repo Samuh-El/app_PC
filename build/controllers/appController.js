@@ -156,10 +156,14 @@ class AppController {
             // )
 
                Admin = admin[0]
-               console.log('admin Admin= ' + Admin)
-               console.log('admin Admin= ' + Admin.NombreUsuario)
+            //    console.log('admin Admin= ' + Admin)
+            //    console.log('admin Admin= ' + Admin.NombreUsuario)
                const token = jwt.sign({ _id: Admin.idUsuario }, 'secretkey')
-               return res.json({ Admin, token })
+            //    return res.json({ Admin, token })
+
+                res.json (
+                admin[0]
+                )
             }
             else {
                 //res.json({message:'password incorrecta'});
