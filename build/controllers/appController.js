@@ -139,21 +139,10 @@ class AppController {
     }
     signin(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.json({
-                text: "felipe dijo que hiciera esto"
-            });
-            return;
             const { email, password } = req.body;
             console.log(email);
             console.log(password);
-            // var Admin={
-            //      idUsuario:0,
-            //      NombreUsuario:'',
-            //      Pyme_idPyme:'',
-            //      direccion:'',
-            //      celular:password,
-            //      correo:''
-            // }
+
             var Admin = {
                 idUsuario: 0,
                 NombreUsuario: '',
@@ -162,12 +151,9 @@ class AppController {
             console.log("consulta a la db por correo y password");
             const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `Usuario-Administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
-                Admin = admin[0];
-                console.log('admin Admin= ' + Admin);
-                console.log('admin Admin= ' + Admin.NombreUsuario);
-                //console.log('idadmin Admin= '+Admin.idUsuario)
-                const token = jsonwebtoken_1.default.sign({ _id: Admin.idUsuario }, 'secretkey');
-                return res.status(200).json({ Admin, token });
+                res.json({
+                    admin
+                });
             }
             else {
                 //res.json({message:'password incorrecta'});
