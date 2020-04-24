@@ -180,7 +180,7 @@ class AppController {
         return __awaiter(this, void 0, void 0, function* () {
 
             console.log('getusuario metodo en node');
-            const usuario = yield database_1.default.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `Usuario-Administrador` AS u INNER JOIN `pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
+            const usuario = yield database_1.default.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `Usuario-Administrador` AS u INNER JOIN `Pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
             console.log('usuario= ' + usuario);
             if (usuario.length > 0) {
                 return res.json(usuario[0]);
