@@ -7,7 +7,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node build/index.js"
+    "start": "nodemon build/index.js"
   },
   "keywords": [],
   "author": "",
