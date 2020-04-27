@@ -86,19 +86,19 @@ class AppController {
             secure: false,
             requireTLS: true,
             auth: {
-                user: 'felipe.ascencio.sandoval@gmail.com',
+                user: 'felipe.ascencio@virginiogomez.cl',
                 pass: '18416518-k'
             }
         });
         let mailOptions = {
-            from: 'felipe.ascencio.sandoval@gmail.com',
+            from: 'felipe.ascencio@virginiogomez.cl',
             to: 'contacto@productochile.cl',
             subject: 'PC Usuario correo= ' + correo,
             text: contentHTML
         };
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                res.json({ error: error });
+                res.json({error});
             }
             res.json({ text: 'enviado correctamente' });
         });
