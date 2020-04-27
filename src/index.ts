@@ -14,28 +14,17 @@ class Server {
      }
 
      config(): void {
-          const corsOptions = {
-               origin: '*',
-               optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-          }
           this.app.set('port', process.env.PORT || 3000);
           this.app.use(morgan('dev'));
-          this.app.use(cors(corsOptions));
+          this.app.use(cors());
           this.app.use(express.json());
           this.app.use(express.urlencoded({extended:false}));
+          
      }
- 
+
      routes(): void {
           this.app.use("/" , indexRoutes);
           this.app.use("/api/app" , appRoutes);
-          // this.app.use((req, res, next) => {
-          //      res.header('Access-Control-Allow-Origin', '*');
-          //      res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-          //      res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-          //      res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-          //      next();
-          //  });
-           
      }
 
      start(): void {

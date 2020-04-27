@@ -82,16 +82,16 @@ class AppController {
 
           let mailOptions = {
                from: 'felipe.ascencio.sandoval@gmail.com',
-               to: 'felipe.ascencio@virginiogomez.cl',
-               subject: 'Mensaje de usuario Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               to: 'contacto@productochile.cl',
+               subject: 'PC Usuario correo= '+correo, //este mensaje debe ir cambiando, asi no quedan todos juntos 
                text: contentHTML
           };
 
           transporter.sendMail(mailOptions, (error: any, info: any) => {
                if (error) {
-                    return console.log(error.message);
+                    res.json({error:error})
                }
-               console.log('success');
+               res.json({text:'enviado correctamente'})
           });
      }
 
@@ -120,8 +120,8 @@ class AppController {
 
           let mailOptions = {
                from: 'felipe.ascencio.sandoval@gmail.com',
-               to: 'felipe.ascencio@virginiogomez.cl',
-               subject: 'Mensaje de usuario Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               to: 'soporte@productochile.cl',
+               subject: 'PC Cliente:'+nombreUsuario+',id: '+idUsuario, //este mensaje debe ir cambiando, asi no quedan todos juntos 
                text: contentHTML
           };
 
@@ -135,11 +135,6 @@ class AppController {
 
 
      public async signin(req: any, res: any): Promise<void> {
-          res.json({
-               text:"felipe dijo que hiciera esto"
-          });
-          return;
-
           const { email, password } = req.body;
           console.log(email)
           console.log(password)
@@ -158,12 +153,12 @@ class AppController {
           }
 
           console.log("consulta a la db por correo y password")
-          const admin = await pool.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `usuario-administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'')
+          const admin = await pool.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme,direccion FROM `usuario-administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'')
           if (admin.length > 0) {
+               // res.json(admin[0])
                Admin = admin[0]
                console.log('admin Admin= ' + Admin)
                console.log('admin Admin= ' + Admin.NombreUsuario)
-               //console.log('idadmin Admin= '+Admin.idUsuario)
                const token = jwt.sign({ _id: Admin.idUsuario }, 'secretkey')
                return res.status(200).json({ Admin, token })
           } else {
@@ -182,7 +177,7 @@ class AppController {
 
           const usuario = await pool.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `usuario-administrador` AS u INNER JOIN `pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
           console.log('usuario= ' + usuario)
-
+   
           if (usuario.length > 0) {
                return res.json(usuario[0]);
           }
@@ -529,7 +524,17 @@ console.log('valor= '+valor)
 
      }
 
+     public async subirImagenProductoServer(req: any, res: any): Promise<void> {
+          console.log('subirImagenProductoServer en node')
+          console.log(req.files.uploads[0].path);
+          return res.json(req.files.uploads[0].path);
+     }
 
+     public async subirImagenServicioServer(req: any, res: any): Promise<void> {
+          console.log('subirImagenServicioServer en node')
+          console.log(req.files.uploads[0].path);
+          return res.json(req.files.uploads[0].path);
+     }
 }
 
 const appController = new AppController();

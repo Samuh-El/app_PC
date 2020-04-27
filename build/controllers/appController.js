@@ -20,7 +20,7 @@ const fs = require('fs');
 class AppController {
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield database_1.default.query('SELECT * FROM `pyme`,`Usuario-Administrador`');
+            const data = yield database_1.default.query('SELECT * FROM `pyme`,`usuario-administrador`');
             res.json(data);
         });
     }
@@ -65,8 +65,8 @@ class AppController {
             const { idUsuario } = req.body;
             console.log(idUsuario);
             console.log(req.body);
-            yield database_1.default.query('UPDATE `Usuario-Administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
-            console.log('UPDATE `Usuario-Administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
+            yield database_1.default.query('UPDATE `usuario-administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
+            console.log('UPDATE `usuario-administrador` set ? WHERE idUsuario = ?', [req.body, req.params.id]);
             res.json(req.body);
         });
     }
@@ -92,15 +92,15 @@ class AppController {
         });
         let mailOptions = {
             from: 'felipe.ascencio.sandoval@gmail.com',
-            to: 'felipe.ascencio@virginiogomez.cl',
-            subject: 'Mensaje de usuario Productos Chile',
+            to: 'contacto@productochile.cl',
+            subject: 'PC Usuario correo= ' + correo,
             text: contentHTML
         };
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                return console.log(error.message);
+                res.json({ error: error });
             }
-            console.log('success');
+            res.json({ text: 'enviado correctamente' });
         });
     }
     sendEmailClient(req, res) {
@@ -126,8 +126,8 @@ class AppController {
         });
         let mailOptions = {
             from: 'felipe.ascencio.sandoval@gmail.com',
-            to: 'felipe.ascencio@virginiogomez.cl',
-            subject: 'Mensaje de usuario Productos Chile',
+            to: 'soporte@productochile.cl',
+            subject: 'PC Cliente:' + nombreUsuario + ',id: ' + idUsuario,
             text: contentHTML
         };
         transporter.sendMail(mailOptions, (error, info) => {
@@ -142,31 +142,28 @@ class AppController {
             const { email, password } = req.body;
             console.log(email);
             console.log(password);
-
+            // var Admin={
+            //      idUsuario:0,
+            //      NombreUsuario:'',
+            //      Pyme_idPyme:'',
+            //      direccion:'',
+            //      celular:password,
+            //      correo:''
+            // }
             var Admin = {
                 idUsuario: 0,
                 NombreUsuario: '',
                 idPyme: 0
             };
             console.log("consulta a la db por correo y password");
-            const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme FROM `Usuario-Administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
+            const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme,direccion FROM `usuario-administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
-            // res.json (
-            //     admin[0]
-            // )
-
-               Admin = admin[0]
-               console.log('admin Admin= ' + Admin)
-               console.log('admin Admin= ' + Admin.NombreUsuario)
-            //    res.json (
-            //     admin[0]
-            //     )
-            //     return    
+                // res.json(admin[0])
+                Admin = admin[0];
+                console.log('admin Admin= ' + Admin);
+                console.log('admin Admin= ' + Admin.NombreUsuario);
                 const token = jsonwebtoken_1.default.sign({ _id: Admin.idUsuario }, 'secretkey');
                 return res.status(200).json({ Admin, token });
-            //    return res.json({ Admin, token })
-
-                
             }
             else {
                 //res.json({message:'password incorrecta'});
@@ -177,9 +174,8 @@ class AppController {
     //obtener usuario-administrador en panel, retorna los datos del usuario y el nombre de la pyme asociada, requiere el id del usuario
     getUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-
             console.log('getusuario metodo en node');
-            const usuario = yield database_1.default.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `Usuario-Administrador` AS u INNER JOIN `Pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
+            const usuario = yield database_1.default.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `usuario-administrador` AS u INNER JOIN `pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
             console.log('usuario= ' + usuario);
             if (usuario.length > 0) {
                 return res.json(usuario[0]);
@@ -190,7 +186,7 @@ class AppController {
     getPyme(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('getpyme metodo en node');
-            const pyme = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `Usuario-Administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
+            const pyme = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `usuario-administrador` AS u ON u.Pyme_idPyme = p.idPyme INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion where u.idUsuario = ?', [req.params.id]);
             if (pyme.length > 0) {
                 return res.json(pyme[0]);
             }
@@ -281,7 +277,7 @@ class AppController {
     getTiposServiciosbyRubro(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('getTiposServiciosbyRubro metodo en node');
-            const tiposServicios = yield database_1.default.query('SELECT t.* FROM `Usuario-Administrador` as u inner join `pyme`as p ON u.Pyme_idPyme = p.idPyme inner join `tipos-servicios-productos` as t on p.Rubro_idRubro=t.idRubro where u.idUsuario = ?', [req.params.id]);
+            const tiposServicios = yield database_1.default.query('SELECT t.* FROM `usuario-administrador` as u inner join `pyme`as p ON u.Pyme_idPyme = p.idPyme inner join `tipos-servicios-productos` as t on p.Rubro_idRubro=t.idRubro where u.idUsuario = ?', [req.params.id]);
             console.log('tipos de Servicios= ' + tiposServicios);
             res.json(tiposServicios);
         });
@@ -491,6 +487,20 @@ class AppController {
                 }
                 console.log('success');
             });
+        });
+    }
+    subirImagenProductoServer(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenProductoServer en node');
+            console.log(req.files.uploads[0].path);
+            return res.json(req.files.uploads[0].path);
+        });
+    }
+    subirImagenServicioServer(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('subirImagenServicioServer en node');
+            console.log(req.files.uploads[0].path);
+            return res.json(req.files.uploads[0].path);
         });
     }
 }
