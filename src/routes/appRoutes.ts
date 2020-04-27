@@ -54,7 +54,8 @@ class AppRoutes {
           this.router.post('/subir-imagen-node',multiPartMiddleware,appController.subirImagenNode)
           this.router.post('/subir-imagen-producto-server',multiPartMiddlewareProducto,appController.subirImagenProductoServer)
           this.router.post('/subir-imagen-servicio-server',multiPartMiddlewareServicio,appController.subirImagenServicioServer)
-          
+          this.router.post('/send-email-solicitud-producto',multiPartMiddlewareServicio,appController.sendEmailSolicitudProducto)
+          this.router.post('/send-email-solicitud-servicio',multiPartMiddlewareServicio,appController.sendEmailSolicitudServicio)
      }
 }
 

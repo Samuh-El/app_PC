@@ -86,19 +86,19 @@ class AppController {
             secure: false,
             requireTLS: true,
             auth: {
-                user: 'felipe.ascencio@virginiogomez.cl',
-                pass: '18416518-k'
+                user: 'productochileoficial@gmail.com',
+                pass: 'p@123!..!'
             }
         });
         let mailOptions = {
-            from: 'felipe.ascencio@virginiogomez.cl',
+            from: 'productochileoficial@gmail.com',
             to: 'contacto@productochile.cl',
             subject: 'PC Usuario correo= ' + correo,
             text: contentHTML
         };
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                res.json({error});
+                res.json({ error: error });
             }
             res.json({ text: 'enviado correctamente' });
         });
@@ -120,12 +120,12 @@ class AppController {
             secure: false,
             requireTLS: true,
             auth: {
-                user: 'felipe.ascencio.sandoval@gmail.com',
-                pass: '18416518-k'
+                user: 'productochileoficial@gmail.com',
+                pass: 'p@123!..!'
             }
         });
         let mailOptions = {
-            from: 'felipe.ascencio.sandoval@gmail.com',
+            from: 'productochileoficial@gmail.com',
             to: 'soporte@productochile.cl',
             subject: 'PC Cliente:' + nombreUsuario + ',id: ' + idUsuario,
             text: contentHTML
@@ -198,7 +198,6 @@ class AppController {
             console.log([req.body, req.params.id]);
             const {} = req.body;
             var contentHTML;
-            return;
             contentHTML = `
           Informacion de usuario de Productos Chile
           Id usuario= ${req.params.id}
@@ -212,12 +211,12 @@ class AppController {
                 secure: false,
                 requireTLS: true,
                 auth: {
-                    user: 'felipe.ascencio@virginiogomez.cl',
-                    pass: '18416518-k'
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
                 }
             });
             let mailOptions = {
-                from: 'felipe.ascencio@virginiogomez.cl',
+                from: 'productochileoficial@gmail.com',
                 to: 'felipe.ascencio.sandoval@gmail.com',
                 subject: 'Mensaje de usuario Productos Chile',
                 text: contentHTML,
@@ -420,31 +419,57 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            console.log(req.files.uploads);
-            console.log(req.files.uploads[0]);
-            console.log(req.files.uploads[0].originalFilename);
-            console.log(req.files.uploads2[0]);
-            console.log(req.files.uploads2[0].originalFilename);
-            console.log(req.files.uploads3[0]);
-            console.log(req.files.uploads3[0].originalFilename);
-            console.log(req.files.uploads4[0]);
-            console.log(req.files.uploads4[0].originalFilename);
             const cabecera = req.files.uploads[0].originalFilename;
+            const cabecera2 = req.files.uploads2[0].originalFilename;
+            const cabecera3 = req.files.uploads3[0].originalFilename;
             const rutacabecera = req.files.uploads[0].path;
-            const caracteristica = req.files.uploads2[0].originalFilename;
-            const rutacaracteristica = req.files.uploads2[0].path;
-            const pyme = req.files.uploads3[0].originalFilename;
-            const rutapyme = req.files.uploads3[0].path;
-            const prodServ = req.files.uploads4[0].originalFilename;
-            const rutaprodServ = req.files.uploads4[0].path;
-            res.json({ 'message': 'fichero subido correctamente' });
+            const rutacabecera2 = req.files.uploads2[0].path;
+            const rutacabecera3 = req.files.uploads3[0].path;
+            const caracteristica = req.files.uploads4[0].originalFilename;
+            const caracteristica2 = req.files.uploads5[0].originalFilename;
+            const caracteristica3 = req.files.uploads6[0].originalFilename;
+            const rutacaracteristica = req.files.uploads4[0].path;
+            const rutacaracteristica2 = req.files.uploads5[0].path;
+            const rutacaracteristica3 = req.files.uploads6[0].path;
+            const pyme = req.files.uploads7[0].originalFilename;
+            const rutapyme = req.files.uploads7[0].path;
+            const prodServ = req.files.uploads8[0].originalFilename;
+            const prodServ2 = req.files.uploads9[0].originalFilename;
+            const prodServ3 = req.files.uploads10[0].originalFilename;
+            const rutaprodServ = req.files.uploads8[0].path;
+            const rutaprodServ2 = req.files.uploads9[0].path;
+            const rutaprodServ3 = req.files.uploads10[0].path;
+            const infoCaracteristica = req.body.uploads11[0];
+            const infoCaracteristica2 = req.body.uploads12[0];
+            const infoCaracteristica3 = req.body.uploads13[0];
+            const infopyme = req.body.uploads14[0];
+            const infoprodserv = req.body.uploads15[0];
+            const infoprodserv2 = req.body.uploads16[0];
+            const infoprodserv3 = req.body.uploads17[0];
             var contentHTML;
             contentHTML = `
                     Solicitud de one page
-                    Nombre archivo cabecera: ${cabecera}
-                    Nombre archivo caracteristica: ${caracteristica}
-                    Nombre archivo pyme: ${pyme}
-                    Nombre archivo producto-servicio: ${prodServ}
+                    Cabecera:
+                    1 - ${cabecera}
+                    2 - ${cabecera2}
+                    3 - ${cabecera3}
+                    Caracteriticas:
+                    1 - Nombre Imagen ${caracteristica}
+                    1 - Informacion ${infoCaracteristica}
+                    2 - Nombre Imagen ${caracteristica2}
+                    2 - Informacion ${infoCaracteristica2}
+                    3 - Nombre Imagen ${caracteristica3}
+                    3 - Informacion ${infoCaracteristica3}
+                    Pyme:
+                    1 - Nombre Imagen  ${pyme}
+                    1 - Informacion ${infopyme}
+                    Producto-Servicio:
+                    1 - Nombre Imagen ${prodServ}
+                    1 - Informacion ${infoprodserv}
+                    2 - Nombre Imagen ${prodServ2}
+                    2 - Informacion ${infoprodserv2}
+                    3 - Nombre Imagen ${prodServ3}
+                    3 - Informacion ${infoprodserv3}
                    `;
             console.log(contentHTML);
             let transporter = nodemailer.createTransport({
@@ -453,13 +478,13 @@ class AppController {
                 secure: false,
                 requireTLS: true,
                 auth: {
-                    user: 'felipe.ascencio@virginiogomez.cl',
-                    pass: '18416518-k'
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
                 }
             });
             let mailOptions = {
-                from: 'felipe.ascencio@virginiogomez.cl',
-                to: 'felipe.ascencio.sandoval@gmail.com',
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
                 subject: 'solicitud one page Productos Chile',
                 text: contentHTML,
                 attachments: [
@@ -468,8 +493,24 @@ class AppController {
                         path: rutacabecera,
                     },
                     {
+                        filename: cabecera2,
+                        path: rutacabecera2,
+                    },
+                    {
+                        filename: cabecera3,
+                        path: rutacabecera3,
+                    },
+                    {
                         filename: caracteristica,
                         path: rutacaracteristica
+                    },
+                    {
+                        filename: caracteristica2,
+                        path: rutacaracteristica2
+                    },
+                    {
+                        filename: caracteristica3,
+                        path: rutacaracteristica3
                     },
                     {
                         filename: pyme,
@@ -478,6 +519,130 @@ class AppController {
                     {
                         filename: prodServ,
                         path: rutaprodServ
+                    },
+                    {
+                        filename: prodServ2,
+                        path: rutaprodServ2
+                    },
+                    {
+                        filename: prodServ3,
+                        path: rutaprodServ3
+                    }
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error.message);
+                }
+                console.log('success');
+            });
+        });
+    }
+    sendEmailSolicitudProducto(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('sendEmailSolicitudProducto  node en node');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            const nombre = req.body.uploads1[0];
+            const desc = req.body.uploads2[0];
+            const precio = req.body.uploads3[0];
+            const cant = req.body.uploads4[0];
+            const tipo = req.body.uploads5[0];
+            const imagenProducto = req.files.uploads6[0].originalFilename;
+            const idPyme = req.body.uploads7[0];
+            const rutaimagen = req.files.uploads6[0].path;
+            var contentHTML;
+            contentHTML = `
+          Solicitud de producto
+          IdPyme: ${idPyme}
+          Nombre Producto: ${nombre}
+          Descripcion: ${desc}
+          Valor:  ${precio}
+          Cantidad: ${cant}
+          Tipo Producto: ${tipo}     
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud producto Productos Chile',
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: imagenProducto,
+                        path: rutaimagen,
+                    }
+                ]
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error.message);
+                }
+                console.log('success');
+            });
+        });
+    }
+    sendEmailSolicitudServicio(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('sendEmailSolicitudServicio  node en node');
+            console.log('body');
+            console.log(req.body);
+            console.log('files');
+            console.log(req.files);
+            const nombre = req.body.uploads1[0];
+            console.log(nombre);
+            const desc = req.body.uploads2[0];
+            console.log(desc);
+            const precio = req.body.uploads3[0];
+            console.log(precio);
+            const tipo = req.body.uploads4[0];
+            console.log(tipo);
+            const imagenServicio = req.files.uploads5[0].originalFilename;
+            const idPyme = req.body.uploads6[0];
+            console.log(idPyme);
+            const rutaimagen = req.files.uploads5[0].path;
+            console.log(rutaimagen);
+            var contentHTML;
+            contentHTML = `
+          Solicitud de servicio
+          IdPyme: ${idPyme}
+          Nombre Servicio: ${nombre}
+          Descripcion: ${desc}
+          Valor:  ${precio}
+          Tipo Servicio: ${tipo}     
+                   `;
+            console.log(contentHTML);
+            let transporter = nodemailer.createTransport({
+                host: 'smtp.gmail.com',
+                port: 587,
+                secure: false,
+                requireTLS: true,
+                auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+                }
+            });
+            let mailOptions = {
+                from: 'productochileoficial@gmail.com',
+                to: 'solicitudonepage@productochile.cl',
+                subject: 'solicitud servicio Productos Chile',
+                text: contentHTML,
+                attachments: [
+                    {
+                        filename: imagenServicio,
+                        path: rutaimagen,
                     }
                 ]
             };

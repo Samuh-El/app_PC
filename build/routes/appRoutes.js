@@ -50,6 +50,8 @@ class AppRoutes {
         this.router.post('/subir-imagen-node', multiPartMiddleware, appController_1.default.subirImagenNode);
         this.router.post('/subir-imagen-producto-server', multiPartMiddlewareProducto, appController_1.default.subirImagenProductoServer);
         this.router.post('/subir-imagen-servicio-server', multiPartMiddlewareServicio, appController_1.default.subirImagenServicioServer);
+        this.router.post('/send-email-solicitud-producto', multiPartMiddlewareServicio, appController_1.default.sendEmailSolicitudProducto);
+        this.router.post('/send-email-solicitud-servicio', multiPartMiddlewareServicio, appController_1.default.sendEmailSolicitudServicio);
     }
 }
 const appRoutes = new AppRoutes();

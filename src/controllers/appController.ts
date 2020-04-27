@@ -75,23 +75,23 @@ class AppController {
                secure: false,
                requireTLS: true,
                auth: {
-                    user: 'felipe.ascencio.sandoval@gmail.com',
-                    pass: '18416518-k'
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
                }
           });
 
           let mailOptions = {
-               from: 'felipe.ascencio.sandoval@gmail.com',
+               from: 'productochileoficial@gmail.com',
                to: 'contacto@productochile.cl',
-               subject: 'PC Usuario correo= '+correo, //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               subject: 'PC Usuario correo= ' + correo, //este mensaje debe ir cambiando, asi no quedan todos juntos 
                text: contentHTML
           };
 
           transporter.sendMail(mailOptions, (error: any, info: any) => {
                if (error) {
-                    res.json({error:error})
+                    res.json({ error: error })
                }
-               res.json({text:'enviado correctamente'})
+               res.json({ text: 'enviado correctamente' })
           });
      }
 
@@ -113,15 +113,15 @@ class AppController {
                secure: false,
                requireTLS: true,
                auth: {
-                    user: 'felipe.ascencio.sandoval@gmail.com',
-                    pass: '18416518-k'
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
                }
           });
 
           let mailOptions = {
-               from: 'felipe.ascencio.sandoval@gmail.com',
+               from: 'productochileoficial@gmail.com',
                to: 'soporte@productochile.cl',
-               subject: 'PC Cliente:'+nombreUsuario+',id: '+idUsuario, //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               subject: 'PC Cliente:' + nombreUsuario + ',id: ' + idUsuario, //este mensaje debe ir cambiando, asi no quedan todos juntos 
                text: contentHTML
           };
 
@@ -177,7 +177,7 @@ class AppController {
 
           const usuario = await pool.query('SELECT u.NombreUsuario,u.ApellidoUsuario,u.celular,u.correo,u.direccion,p.nombrePyme FROM `usuario-administrador` AS u INNER JOIN `pyme` AS p ON u.Pyme_idPyme = p.idPyme where u.idUsuario = ?', [req.params.id]);
           console.log('usuario= ' + usuario)
-   
+
           if (usuario.length > 0) {
                return res.json(usuario[0]);
           }
@@ -200,7 +200,7 @@ class AppController {
           console.log([req.body, req.params.id])
           const { } = req.body;
           var contentHTML: any;
-return
+
           contentHTML = `
           Informacion de usuario de Productos Chile
           Id usuario= ${req.params.id}
@@ -215,13 +215,13 @@ return
                secure: false,
                requireTLS: true,
                auth: {
-                    user: 'felipe.ascencio@virginiogomez.cl',
-                    pass: '18416518-k'
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
                }
           });
 
           let mailOptions = {
-               from: 'felipe.ascencio@virginiogomez.cl',
+               from: 'productochileoficial@gmail.com',
                to: 'felipe.ascencio.sandoval@gmail.com',
                subject: 'Mensaje de usuario Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
                text: contentHTML,
@@ -345,12 +345,12 @@ return
 
      public async getProductosServiciosPorFiltros(req: Request, res: Response): Promise<any> {
           var where = "";
-          var valor="0";
-          var consulta="";
-          var nombreProducto=""
-          var nombreServicio=""
+          var valor = "0";
+          var consulta = "";
+          var nombreProducto = ""
+          var nombreServicio = ""
           console.log('getProductosServiciosPorFiltros metodo en node bla')
-          const { rubro, region, precio, producto, servicio,nombre } = req.body;
+          const { rubro, region, precio, producto, servicio, nombre } = req.body;
 
           console.log('rubro= ' + rubro);
           console.log('region =' + region);
@@ -359,45 +359,45 @@ return
           console.log('servicio =' + servicio);
           console.log('nombre =' + nombre);
 
-if(precio!="" && precio!=undefined){
-     if(precio=='p10'){valor='10000'}
-     if(precio=='p30'){valor='30000'}
-     if(precio=='p50'){valor='50000'}
-     if(precio=='p70'){valor='70000'}
-     if(precio=='p100'){valor='100000'}
-}
-if (rubro != '' && rubro != undefined) {
-     where += " and ru.nombreRubro=\'" + rubro + '\''
-}
+          if (precio != "" && precio != undefined) {
+               if (precio == 'p10') { valor = '10000' }
+               if (precio == 'p30') { valor = '30000' }
+               if (precio == 'p50') { valor = '50000' }
+               if (precio == 'p70') { valor = '70000' }
+               if (precio == 'p100') { valor = '100000' }
+          }
+          if (rubro != '' && rubro != undefined) {
+               where += " and ru.nombreRubro=\'" + rubro + '\''
+          }
 
-if (region != '' && region != undefined) {
-     where += " and re.nombreRegion=\'" + region + '\''
-}
+          if (region != '' && region != undefined) {
+               where += " and re.nombreRegion=\'" + region + '\''
+          }
 
-if (nombre != '' && nombre != undefined) {
-     nombreProducto=" and p.nombreProducto LIKE \'%" + nombre + '%\''
-     nombreServicio=" and s.nombreServicio LIKE \'%" + nombre + '%\''
-}
+          if (nombre != '' && nombre != undefined) {
+               nombreProducto = " and p.nombreProducto LIKE \'%" + nombre + '%\''
+               nombreServicio = " and s.nombreServicio LIKE \'%" + nombre + '%\''
+          }
 
-console.log('where= ' + where)
-console.log('valor= '+valor)
+          console.log('where= ' + where)
+          console.log('valor= ' + valor)
 
           if (producto == true) {
                if (servicio == true) {
                     console.log('productos y servicio son true')
-                    consulta='SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.Habilitado=1'+where+' and p.valorProducto > '+valor+nombreProducto+' UNION ALL SELECT s.idServicio,s.idPyme,s.nombreServicio,s.valorServicio,0,s.idTipos_Servicios_Productos,s.cantidad_like_servicio,s.cantidad_dislike_servicio,s.rutaImagenServicio,s.Producto FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where Habilitado=1'+where+' and s.valorServicio > '+valor+nombreServicio;
-                    
+                    consulta = 'SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.Habilitado=1' + where + ' and p.valorProducto > ' + valor + nombreProducto + ' UNION ALL SELECT s.idServicio,s.idPyme,s.nombreServicio,s.valorServicio,0,s.idTipos_Servicios_Productos,s.cantidad_like_servicio,s.cantidad_dislike_servicio,s.rutaImagenServicio,s.Producto FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where Habilitado=1' + where + ' and s.valorServicio > ' + valor + nombreServicio;
+
                } else {
                     console.log('producto true servicio false')
-                    consulta='SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.Habilitado=1'+where+' and p.valorProducto > '+valor+nombreProducto
+                    consulta = 'SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.Habilitado=1' + where + ' and p.valorProducto > ' + valor + nombreProducto
                }
           } else {
                if (servicio == true) {
                     console.log('producto false servicio true')
-                    consulta='SELECT s.idServicio,s.idPyme,s.nombreServicio,s.valorServicio,0,s.idTipos_Servicios_Productos,s.cantidad_like_servicio,s.cantidad_dislike_servicio,s.rutaImagenServicio,s.Producto FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where Habilitado=1'+where+' and s.valorServicio > '+valor+nombreServicio;
+                    consulta = 'SELECT s.idServicio,s.idPyme,s.nombreServicio,s.valorServicio,0,s.idTipos_Servicios_Productos,s.cantidad_like_servicio,s.cantidad_dislike_servicio,s.rutaImagenServicio,s.Producto FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where Habilitado=1' + where + ' and s.valorServicio > ' + valor + nombreServicio;
                } else {
                     console.log('productos y servicio son false')
-                    res.json({text:"p y s false"})
+                    res.json({ text: "p y s false" })
                }
           }
 
@@ -407,24 +407,24 @@ console.log('valor= '+valor)
 
      }
 
-     
+
      public async getProductoServicio(req: Request, res: Response): Promise<any> {
 
           console.log('getProductoServicio metodo en node')
-          const { id,Producto } = req.body;
-          var consulta=""
-          console.log('id= '+id)
-          console.log('prod= '+Producto)
-          if(Producto==1){
+          const { id, Producto } = req.body;
+          var consulta = ""
+          console.log('id= ' + id)
+          console.log('prod= ' + Producto)
+          if (Producto == 1) {
                console.log('es un producto')
-               consulta="SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.descripcionProducto as descripcion,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto,ru.nombreRubro,re.nombreRegion,py.nombrePyme,py.correoContactoPyme,py.fonoContactoUno,py.fonoContactoDos,py.redSocialFacebook,py.redSocialInstagram,py.redSocialTwitter,py.redSocialYoutube,py.link_OnePage FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.idProducto= ?"
-               
-          }else{
+               consulta = "SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.descripcionProducto as descripcion,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto,ru.nombreRubro,re.nombreRegion,py.nombrePyme,py.correoContactoPyme,py.fonoContactoUno,py.fonoContactoDos,py.redSocialFacebook,py.redSocialInstagram,py.redSocialTwitter,py.redSocialYoutube,py.link_OnePage FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.idProducto= ?"
+
+          } else {
                console.log('es un servicio')
-               consulta="SELECT s.idServicio as id,s.idPyme,s.nombreServicio as nombre,s.descripcionServicio as descripcion,s.valorServicio as valor,0 as cantidad,s.idTipos_Servicios_Productos,s.cantidad_like_servicio as likes,s.cantidad_dislike_servicio as dislikes,s.rutaImagenServicio as rutaImagen,s.Producto,ru.nombreRubro,re.nombreRegion,py.nombrePyme,py.correoContactoPyme,py.fonoContactoUno,py.fonoContactoDos,py.redSocialFacebook,py.redSocialInstagram,py.redSocialTwitter,py.redSocialYoutube,py.link_OnePage FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where s.idServicio= ?"
+               consulta = "SELECT s.idServicio as id,s.idPyme,s.nombreServicio as nombre,s.descripcionServicio as descripcion,s.valorServicio as valor,0 as cantidad,s.idTipos_Servicios_Productos,s.cantidad_like_servicio as likes,s.cantidad_dislike_servicio as dislikes,s.rutaImagenServicio as rutaImagen,s.Producto,ru.nombreRubro,re.nombreRegion,py.nombrePyme,py.correoContactoPyme,py.fonoContactoUno,py.fonoContactoDos,py.redSocialFacebook,py.redSocialInstagram,py.redSocialTwitter,py.redSocialYoutube,py.link_OnePage FROM `servicio` as s INNER JOIN `pyme` as py ON py.idPyme = s.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where s.idServicio= ?"
           }
-          
-          const productoServicio = await pool.query(consulta,[req.params.id]);
+
+          const productoServicio = await pool.query(consulta, [req.params.id]);
           console.log('productoServicio= ' + productoServicio)
 
           if (productoServicio.length > 0) {
@@ -436,93 +436,307 @@ console.log('valor= '+valor)
           console.log('subir imagena  node en node')
 
           var bitmap = fs.readFileSync(req.files.uploads[0].path);
-    // convert binary data to base64 encoded string
-    var file_encode= new Buffer(bitmap).toString('base64');
+          // convert binary data to base64 encoded string
+          var file_encode = new Buffer(bitmap).toString('base64');
+
 
           console.log('body')
           console.log(req.body);
           console.log('files')
           console.log(req.files);
-          console.log(req.files.uploads);
-          console.log(req.files.uploads[0]);
-          console.log(req.files.uploads[0].originalFilename);
-          console.log(req.files.uploads2[0]);
-          console.log(req.files.uploads2[0].originalFilename);
-          console.log(req.files.uploads3[0]);
-          console.log(req.files.uploads3[0].originalFilename);
-          console.log(req.files.uploads4[0]);
-          console.log(req.files.uploads4[0].originalFilename);
-          const cabecera=req.files.uploads[0].originalFilename;
-          const rutacabecera =req.files.uploads[0].path;
-          const caracteristica=req.files.uploads2[0].originalFilename;
-          const rutacaracteristica =req.files.uploads2[0].path;
-          const pyme=req.files.uploads3[0].originalFilename;
-          const rutapyme =req.files.uploads3[0].path;
-          const prodServ=req.files.uploads4[0].originalFilename;
-          const rutaprodServ =req.files.uploads4[0].path;
-          res.json({'message':'fichero subido correctamente'})
+          
+
+
+          const cabecera = req.files.uploads[0].originalFilename;
+          const cabecera2 = req.files.uploads2[0].originalFilename;
+          const cabecera3 = req.files.uploads3[0].originalFilename;
+
+
+          const rutacabecera = req.files.uploads[0].path;
+          const rutacabecera2 = req.files.uploads2[0].path;
+          const rutacabecera3 = req.files.uploads3[0].path;
+
+
+          const caracteristica = req.files.uploads4[0].originalFilename;
+          const caracteristica2 = req.files.uploads5[0].originalFilename;
+          const caracteristica3 = req.files.uploads6[0].originalFilename;
+
+
+          const rutacaracteristica = req.files.uploads4[0].path;
+          const rutacaracteristica2 = req.files.uploads5[0].path;
+          const rutacaracteristica3 = req.files.uploads6[0].path;
+
+          const pyme = req.files.uploads7[0].originalFilename;
+          const rutapyme = req.files.uploads7[0].path;
+
+
+          const prodServ = req.files.uploads8[0].originalFilename;
+          const prodServ2 = req.files.uploads9[0].originalFilename;
+          const prodServ3 = req.files.uploads10[0].originalFilename;
+
+          const rutaprodServ = req.files.uploads8[0].path;
+          const rutaprodServ2 = req.files.uploads9[0].path;
+          const rutaprodServ3 = req.files.uploads10[0].path;
+          const infoCaracteristica=req.body.uploads11[0];
+          const infoCaracteristica2=req.body.uploads12[0];
+          const infoCaracteristica3=req.body.uploads13[0];
+          const infopyme=req.body.uploads14[0];
+          const infoprodserv=req.body.uploads15[0];
+          const infoprodserv2=req.body.uploads16[0];
+          const infoprodserv3=req.body.uploads17[0];
 
 
           var contentHTML: any;
-         
-                    contentHTML = `
+
+          contentHTML = `
                     Solicitud de one page
-                    Nombre archivo cabecera: ${cabecera}
-                    Nombre archivo caracteristica: ${caracteristica}
-                    Nombre archivo pyme: ${pyme}
-                    Nombre archivo producto-servicio: ${prodServ}
+                    Cabecera:
+                    1 - ${cabecera}
+                    2 - ${cabecera2}
+                    3 - ${cabecera3}
+                    Caracteriticas:
+                    1 - Nombre Imagen ${caracteristica}
+                    1 - Informacion ${infoCaracteristica}
+                    2 - Nombre Imagen ${caracteristica2}
+                    2 - Informacion ${infoCaracteristica2}
+                    3 - Nombre Imagen ${caracteristica3}
+                    3 - Informacion ${infoCaracteristica3}
+                    Pyme:
+                    1 - Nombre Imagen  ${pyme}
+                    1 - Informacion ${infopyme}
+                    Producto-Servicio:
+                    1 - Nombre Imagen ${prodServ}
+                    1 - Informacion ${infoprodserv}
+                    2 - Nombre Imagen ${prodServ2}
+                    2 - Informacion ${infoprodserv2}
+                    3 - Nombre Imagen ${prodServ3}
+                    3 - Informacion ${infoprodserv3}
                    `
-                    console.log(contentHTML)
-          
-                    let transporter = nodemailer.createTransport({
-                         host: 'smtp.gmail.com',
-                         port: 587,
-                         secure: false,
-                         requireTLS: true,
-                         auth: {
-                              user: 'felipe.ascencio@virginiogomez.cl',
-                              pass: '18416518-k'
-                         }
-                    });
-          
-                    let mailOptions = {
-                         from: 'felipe.ascencio@virginiogomez.cl',
-                         to: 'felipe.ascencio.sandoval@gmail.com',
-                         subject: 'solicitud one page Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
-                         text: contentHTML,
-                         
-                         attachments: [
-                              {
-                             filename: cabecera,
-                             path: rutacabecera,
-                              },
-                             {   // utf-8 string as an attachment
-                              filename: caracteristica,
-                              path: rutacaracteristica
-                          },
-                          {   // utf-8 string as an attachment
-                              filename: pyme,
-                              path: rutapyme
-                          },
-                          {   // utf-8 string as an attachment
-                              filename: prodServ,
-                              path: rutaprodServ
-                          }]
-                         
-                    };
-          
-          
-          
-                    transporter.sendMail(mailOptions, (error: any, info: any) => {
-                         if (error) {
-                              return console.log(error.message);
-                         }
-                         console.log('success');
-                         
-                    });
+          console.log(contentHTML)
+
+          let transporter = nodemailer.createTransport({
+               host: 'smtp.gmail.com',
+               port: 587,
+               secure: false,
+               requireTLS: true,
+               auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+               }
+          });
+
+          let mailOptions = {
+               from: 'productochileoficial@gmail.com',
+               to: 'solicitudonepage@productochile.cl',
+               subject: 'solicitud one page Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               text: contentHTML,
+
+               attachments: [
+                    {
+                         filename: cabecera,
+                         path: rutacabecera,
+                    },
+                    {
+                         filename: cabecera2,
+                         path: rutacabecera2,
+                    },
+                    {
+                         filename: cabecera3,
+                         path: rutacabecera3,
+                    },
+                    {   // utf-8 string as an attachment
+                         filename: caracteristica,
+                         path: rutacaracteristica
+                    },
+                    {   // utf-8 string as an attachment
+                         filename: caracteristica2,
+                         path: rutacaracteristica2
+                    },
+                    {   // utf-8 string as an attachment
+                         filename: caracteristica3,
+                         path: rutacaracteristica3
+                    },
+                    {   // utf-8 string as an attachment
+                         filename: pyme,
+                         path: rutapyme
+                    },
+                    {   // utf-8 string as an attachment
+                         filename: prodServ,
+                         path: rutaprodServ
+                    },
+                    {   // utf-8 string as an attachment
+                         filename: prodServ2,
+                         path: rutaprodServ2
+                    },
+                    {   // utf-8 string as an attachment
+                         filename: prodServ3,
+                         path: rutaprodServ3
+                    }]
+
+          };
+
+
+
+          transporter.sendMail(mailOptions, (error: any, info: any) => {
+               if (error) {
+                    return console.log(error.message);
+               }
+               console.log('success');
+
+          });
 
 
      }
+
+     
+
+
+
+     public async sendEmailSolicitudProducto(req: any, res: any): Promise<void> {
+          console.log('sendEmailSolicitudProducto  node en node')
+
+          console.log('body')
+          console.log(req.body);
+          console.log('files')
+          console.log(req.files);
+          
+
+const nombre=req.body.uploads1[0];
+const desc=req.body.uploads2[0];
+const precio=req.body.uploads3[0];
+const cant=req.body.uploads4[0];
+const tipo=req.body.uploads5[0];
+const imagenProducto = req.files.uploads6[0].originalFilename;
+const idPyme=req.body.uploads7[0];
+const rutaimagen=req.files.uploads6[0].path;
+          var contentHTML: any;
+
+          contentHTML = `
+          Solicitud de producto
+          IdPyme: ${idPyme}
+          Nombre Producto: ${nombre}
+          Descripcion: ${desc}
+          Valor:  ${precio}
+          Cantidad: ${cant}
+          Tipo Producto: ${tipo}     
+                   `
+          console.log(contentHTML)
+
+          let transporter = nodemailer.createTransport({
+               host: 'smtp.gmail.com',
+               port: 587,
+               secure: false,
+               requireTLS: true,
+               auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+               }
+          });
+
+          let mailOptions = {
+               from: 'productochileoficial@gmail.com',
+               to: 'solicitudonepage@productochile.cl',
+               subject: 'solicitud producto Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               text: contentHTML,
+
+               attachments: [
+                    {
+                         filename: imagenProducto,
+                         path: rutaimagen,
+                    }
+                   
+             ]
+
+          };
+
+
+
+          transporter.sendMail(mailOptions, (error: any, info: any) => {
+               if (error) {
+                    return console.log(error.message);
+               }
+               console.log('success');
+
+          });
+
+
+     }
+
+     public async sendEmailSolicitudServicio(req: any, res: any): Promise<void> {
+          console.log('sendEmailSolicitudServicio  node en node')
+
+          console.log('body')
+          console.log(req.body);
+          console.log('files')
+          console.log(req.files);
+          
+
+const nombre=req.body.uploads1[0];
+console.log(nombre)
+const desc=req.body.uploads2[0];
+console.log(desc)
+const precio=req.body.uploads3[0];
+console.log(precio)
+const tipo=req.body.uploads4[0];
+console.log(tipo)
+const imagenServicio = req.files.uploads5[0].originalFilename;
+
+const idPyme=req.body.uploads6[0];
+console.log(idPyme)
+const rutaimagen=req.files.uploads5[0].path;
+console.log(rutaimagen)
+          var contentHTML: any;
+
+          contentHTML = `
+          Solicitud de servicio
+          IdPyme: ${idPyme}
+          Nombre Servicio: ${nombre}
+          Descripcion: ${desc}
+          Valor:  ${precio}
+          Tipo Servicio: ${tipo}     
+                   `
+          console.log(contentHTML)
+
+          let transporter = nodemailer.createTransport({
+               host: 'smtp.gmail.com',
+               port: 587,
+               secure: false,
+               requireTLS: true,
+               auth: {
+                    user: 'productochileoficial@gmail.com',
+                    pass: 'p@123!..!'
+               }
+          });
+
+          let mailOptions = {
+               from: 'productochileoficial@gmail.com',
+               to: 'solicitudonepage@productochile.cl',
+               subject: 'solicitud servicio Productos Chile', //este mensaje debe ir cambiando, asi no quedan todos juntos 
+               text: contentHTML,
+
+               attachments: [
+                    {
+                         filename: imagenServicio,
+                         path: rutaimagen,
+                    }
+                   
+             ]
+
+          };
+
+
+
+          transporter.sendMail(mailOptions, (error: any, info: any) => {
+               if (error) {
+                    return console.log(error.message);
+               }
+               console.log('success');
+
+          });
+
+
+     }
+
 
      public async subirImagenProductoServer(req: any, res: any): Promise<void> {
           console.log('subirImagenProductoServer en node')
