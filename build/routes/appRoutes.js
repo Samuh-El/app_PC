@@ -10,6 +10,12 @@ var multipart = require('connect-multiparty');
 const multiPartMiddleware = multipart({
     uploadDir: './src/solicitud-onePage'
 });
+const multiPartMiddlewareProducto = multipart({
+    uploadDir: './src/imagenes/productos'
+});
+const multiPartMiddlewareServicio = multipart({
+    uploadDir: './src/imagenes/servicios'
+});
 class AppRoutes {
     constructor() {
         this.router = express_1.Router();
@@ -42,6 +48,8 @@ class AppRoutes {
         this.router.post('/get-productos-servicios-por-filtros', appController_1.default.getProductosServiciosPorFiltros);
         this.router.post('/get-producto-servicio/:id', appController_1.default.getProductoServicio);
         this.router.post('/subir-imagen-node', multiPartMiddleware, appController_1.default.subirImagenNode);
+        this.router.post('/subir-imagen-producto-server', multiPartMiddlewareProducto, appController_1.default.subirImagenProductoServer);
+        this.router.post('/subir-imagen-servicio-server', multiPartMiddlewareServicio, appController_1.default.subirImagenServicioServer);
     }
 }
 const appRoutes = new AppRoutes();

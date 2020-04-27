@@ -15,9 +15,13 @@ class Server {
         this.routes();
     }
     config() {
+        const corsOptions = {
+            origin: '*',
+            optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+        };
         this.app.set('port', process.env.PORT || 3000);
         this.app.use(morgan_1.default('dev'));
-        this.app.use(cors_1.default());
+        this.app.use(cors_1.default(corsOptions));
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
