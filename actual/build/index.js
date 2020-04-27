@@ -15,26 +15,15 @@ class Server {
         this.routes();
     }
     config() {
-        const corsOptions = {
-            origin: '*',
-            optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-        };
         this.app.set('port', process.env.PORT || 3000);
         this.app.use(morgan_1.default('dev'));
-        this.app.use(cors_1.default(corsOptions));
+        this.app.use(cors_1.default());
         this.app.use(express_1.default.json());
         this.app.use(express_1.default.urlencoded({ extended: false }));
     }
     routes() {
         this.app.use("/", indexRoutes_1.default);
         this.app.use("/api/app", appRoutes_1.default);
-        // this.app.use((req, res, next) => {
-        //      res.header('Access-Control-Allow-Origin', '*');
-        //      res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-        //      res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-        //      res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-        //      next();
-        //  });
     }
     start() {
         this.app.listen(this.app.get('port'), () => {
