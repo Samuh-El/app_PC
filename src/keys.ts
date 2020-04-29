@@ -15,6 +15,6 @@ export default{
           user:'root',
           password:'',
           database:'productoschile',
-     }  
+     }   
       
 }

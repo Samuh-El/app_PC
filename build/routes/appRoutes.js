@@ -47,6 +47,7 @@ class AppRoutes {
         this.router.post('/get-productos-servicios-por-rubro', appController_1.default.getProductosServiciosPorRubro);
         this.router.post('/get-productos-servicios-por-filtros', appController_1.default.getProductosServiciosPorFiltros);
         this.router.post('/get-producto-servicio/:id', appController_1.default.getProductoServicio);
+        this.router.get('/get-producto-servicio-from-home/:id', appController_1.default.getProductoServicioFromHome);
         this.router.post('/subir-imagen-node', multiPartMiddleware, appController_1.default.subirImagenNode);
         this.router.post('/subir-imagen-producto-server', multiPartMiddlewareProducto, appController_1.default.subirImagenProductoServer);
         this.router.post('/subir-imagen-servicio-server', multiPartMiddlewareServicio, appController_1.default.subirImagenServicioServer);

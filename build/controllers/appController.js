@@ -153,15 +153,17 @@ class AppController {
             var Admin = {
                 idUsuario: 0,
                 NombreUsuario: '',
-                idPyme: 0
+                idPyme: 0,
+                link_OnePage: ''
             };
             console.log("consulta a la db por correo y password");
-            const admin = yield database_1.default.query('SELECT idUsuario,NombreUsuario,Pyme_idPyme,direccion FROM `usuario-administrador` WHERE correo=\'' + email + '\' AND ClaveUsuario=\'' + password + '\'');
+            const admin = yield database_1.default.query('SELECT u.idUsuario,u.NombreUsuario,u.Pyme_idPyme,p.link_OnePage FROM `usuario-administrador` as u INNER JOIN `pyme`as p ON u.Pyme_idPyme = p.idPyme WHERE u.correo=\'' + email + '\' AND u.ClaveUsuario=\'' + password + '\'');
             if (admin.length > 0) {
                 // res.json(admin[0])
                 Admin = admin[0];
                 console.log('admin Admin= ' + Admin);
                 console.log('admin Admin= ' + Admin.NombreUsuario);
+                console.log('onePage Admin= ' + Admin.link_OnePage);
                 const token = jsonwebtoken_1.default.sign({ _id: Admin.idUsuario }, 'secretkey');
                 return res.status(200).json({ Admin, token });
             }
@@ -409,6 +411,21 @@ class AppController {
             return res.json({ text: "productoServicio no existe en db" });
         });
     }
+    getProductoServicioFromHome(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getProductoServicioFromHome metodo en node');
+            const { id } = req.body;
+            var consulta = "";
+            console.log('id rubro= ' + id);
+            consulta = "SELECT p.idProducto as id,p.idPyme,p.nombreProducto as nombre,p.descripcionProducto as descripcion,p.valorProducto as valor,p.cantidadProducto as cantidad,p.idTipos_Servicios_Productos,p.cantidad_like_producto as likes,p.cantidad_dislike_producto as dislikes,p.rutaImagenProducto as rutaImagen,p.Producto,ru.nombreRubro,re.nombreRegion,py.nombrePyme,py.correoContactoPyme,py.fonoContactoUno,py.fonoContactoDos,py.redSocialFacebook,py.redSocialInstagram,py.redSocialTwitter,py.redSocialYoutube,py.link_OnePage FROM `producto` as p INNER JOIN `pyme` as py ON py.idPyme = p.idPyme INNER JOIN `rubro` as ru ON ru.idRubro = py.Rubro_idRubro INNER JOIN `region` as re ON re.idRegion = py.idRegion where p.Habilitado<>0 and ru.idRubro=" + [req.params.id] + " order by p.fecha_creacion_producto DESC LIMIT 1";
+            const productoServicio = yield database_1.default.query(consulta);
+            console.log('productoServicio= ' + productoServicio);
+            if (productoServicio.length > 0) {
+                return res.json(productoServicio[0]);
+            }
+            return res.json({ text: "no existen productos de este rubro" });
+        });
+    }
     subirImagenNode(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('subir imagena  node en node');
@@ -436,16 +453,43 @@ class AppController {
             const prodServ = req.files.uploads8[0].originalFilename;
             const prodServ2 = req.files.uploads9[0].originalFilename;
             const prodServ3 = req.files.uploads10[0].originalFilename;
+            const prodServ4 = req.files.uploads11[0].originalFilename;
+            const prodServ5 = req.files.uploads12[0].originalFilename;
+            const prodServ6 = req.files.uploads13[0].originalFilename;
+            const prodServ7 = req.files.uploads14[0].originalFilename;
+            const prodServ8 = req.files.uploads15[0].originalFilename;
+            const prodServ9 = req.files.uploads16[0].originalFilename;
+            const prodServ10 = req.files.uploads17[0].originalFilename;
+            const prodServ11 = req.files.uploads18[0].originalFilename;
+            const prodServ12 = req.files.uploads19[0].originalFilename;
             const rutaprodServ = req.files.uploads8[0].path;
             const rutaprodServ2 = req.files.uploads9[0].path;
             const rutaprodServ3 = req.files.uploads10[0].path;
-            const infoCaracteristica = req.body.uploads11[0];
-            const infoCaracteristica2 = req.body.uploads12[0];
-            const infoCaracteristica3 = req.body.uploads13[0];
-            const infopyme = req.body.uploads14[0];
-            const infoprodserv = req.body.uploads15[0];
-            const infoprodserv2 = req.body.uploads16[0];
-            const infoprodserv3 = req.body.uploads17[0];
+            const rutaprodServ4 = req.files.uploads11[0].path;
+            const rutaprodServ5 = req.files.uploads12[0].path;
+            const rutaprodServ6 = req.files.uploads13[0].path;
+            const rutaprodServ7 = req.files.uploads14[0].path;
+            const rutaprodServ8 = req.files.uploads15[0].path;
+            const rutaprodServ9 = req.files.uploads16[0].path;
+            const rutaprodServ10 = req.files.uploads17[0].path;
+            const rutaprodServ11 = req.files.uploads18[0].path;
+            const rutaprodServ12 = req.files.uploads19[0].path;
+            const infoCaracteristica = req.body.uploads20[0];
+            const infoCaracteristica2 = req.body.uploads21[0];
+            const infoCaracteristica3 = req.body.uploads22[0];
+            const infopyme = req.body.uploads23[0];
+            const infoprodserv = req.body.uploads24[0];
+            const infoprodserv2 = req.body.uploads25[0];
+            const infoprodserv3 = req.body.uploads26[0];
+            const infoprodserv4 = req.body.uploads27[0];
+            const infoprodserv5 = req.body.uploads28[0];
+            const infoprodserv6 = req.body.uploads29[0];
+            const infoprodserv7 = req.body.uploads30[0];
+            const infoprodserv8 = req.body.uploads31[0];
+            const infoprodserv9 = req.body.uploads32[0];
+            const infoprodserv10 = req.body.uploads33[0];
+            const infoprodserv11 = req.body.uploads34[0];
+            const infoprodserv12 = req.body.uploads35[0];
             var contentHTML;
             contentHTML = `
                     Solicitud de one page
@@ -470,6 +514,24 @@ class AppController {
                     2 - Informacion ${infoprodserv2}
                     3 - Nombre Imagen ${prodServ3}
                     3 - Informacion ${infoprodserv3}
+                    4 - Nombre Imagen ${prodServ4}
+                    4 - Informacion ${infoprodserv4}
+                    5 - Nombre Imagen ${prodServ5}
+                    5 - Informacion ${infoprodserv5}
+                    6 - Nombre Imagen ${prodServ6}
+                    6 - Informacion ${infoprodserv6}
+                    7 - Nombre Imagen ${prodServ7}
+                    7 - Informacion ${infoprodserv7}
+                    8 - Nombre Imagen ${prodServ8}
+                    8 - Informacion ${infoprodserv8}
+                    9 - Nombre Imagen ${prodServ9}
+                    9 - Informacion ${infoprodserv9}
+                    10 - Nombre Imagen ${prodServ10}
+                    10 - Informacion ${infoprodserv10}
+                    11 - Nombre Imagen ${prodServ11}
+                    11 - Informacion ${infoprodserv11}
+                    12 - Nombre Imagen ${prodServ12}
+                    12 - Informacion ${infoprodserv12}
                    `;
             console.log(contentHTML);
             let transporter = nodemailer.createTransport({
@@ -527,6 +589,42 @@ class AppController {
                     {
                         filename: prodServ3,
                         path: rutaprodServ3
+                    },
+                    {
+                        filename: prodServ4,
+                        path: rutaprodServ4
+                    },
+                    {
+                        filename: prodServ5,
+                        path: rutaprodServ5
+                    },
+                    {
+                        filename: prodServ6,
+                        path: rutaprodServ6
+                    },
+                    {
+                        filename: prodServ7,
+                        path: rutaprodServ7
+                    },
+                    {
+                        filename: prodServ8,
+                        path: rutaprodServ8
+                    },
+                    {
+                        filename: prodServ9,
+                        path: rutaprodServ9
+                    },
+                    {
+                        filename: prodServ10,
+                        path: rutaprodServ10
+                    },
+                    {
+                        filename: prodServ11,
+                        path: rutaprodServ11
+                    },
+                    {
+                        filename: prodServ12,
+                        path: rutaprodServ12
                     }
                 ]
             };
