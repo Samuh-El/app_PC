@@ -57,6 +57,8 @@ class AppRoutes {
           this.router.post('/subir-imagen-servicio-server',multiPartMiddlewareServicio,appController.subirImagenServicioServer)
           this.router.post('/send-email-solicitud-producto',multiPartMiddlewareServicio,appController.sendEmailSolicitudProducto)
           this.router.post('/send-email-solicitud-servicio',multiPartMiddlewareServicio,appController.sendEmailSolicitudServicio)
+          
+          this.router.get('/get-pymes-por-entidad/:id', appController.getPymesPorEntidad);
      }
 }
 

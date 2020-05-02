@@ -766,6 +766,14 @@ class AppController {
             return res.json(req.files.uploads[0].path);
         });
     }
+    getPymesPorEntidad(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('getPymesPorEntidad en server nodejs');
+            console.log('nombre= ' + req.params.id);
+            const pymes = yield database_1.default.query('SELECT p.nombrePyme,p.giroPyme,p.fonoContactoUno,p.fonoContactoDos,p.correoContactoPyme,p.redSocialFacebook,p.redSocialInstagram,p.redSocialTwitter,p.redSocialYoutube,p.Region,p.descripcionPyme,e.desEntidad,ru.nombreRubro,re.nombreRegion FROM `pyme` AS p INNER JOIN `rubro` AS ru ON p.Rubro_idRubro = ru.idRubro INNER JOIN `region` AS re ON p.idRegion = re.idRegion INNER JOIN `entidad` AS e ON p.idEntidad = e.idEntidad where e.nombreEntidad like "%' + req.params.id + '%"');
+            res.json(pymes);
+        });
+    }
 }
 const appController = new AppController();
 exports.default = appController;
