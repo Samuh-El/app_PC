@@ -36,6 +36,7 @@ class AppRoutes {
           this.router.get('/get-pyme/:id', appController.getPyme);
           this.router.put('/update-datos-empresariales/:id', appController.updateDatosEmpresariales);
           this.router.put('/update-datos-usuario/:id', appController.updateDatosUsuario);
+          this.router.put('/update-usuario-password/:id', appController.updateUsuarioPassword);
           this.router.post('/solicitar-OnePage/:id', appController.solicitarOnePage);
           this.router.get('/get-productos-by-user/:id', appController.getProductosbyUser);
           this.router.get('/get-servicios-by-user/:id', appController.getServiciosbyUser);
@@ -53,6 +54,17 @@ class AppRoutes {
           this.router.post('/get-producto-servicio/:id', appController.getProductoServicio);
           this.router.get('/get-producto-servicio-from-home/:id', appController.getProductoServicioFromHome);
           this.router.post('/subir-imagen-node',multiPartMiddleware,appController.subirImagenNode)
+
+          this.router.post('/subir-imagenes-cabecera-node/:id',multiPartMiddleware,appController.subirImagenesCabeceraNode)
+          this.router.post('/subir-imagenes-caracteristica-node/:id',multiPartMiddleware,appController.subirImagenesCaracteristicaNode)
+          this.router.post('/subir-imagen-pyme-node/:id',multiPartMiddleware,appController.subirImagenPymeNode) 
+          this.router.post('/subir-imagenes-producto-servicio-node/:id',multiPartMiddleware,appController.subirImagenesProductoServicioNode)
+
+          this.router.post('/subir-imagenes-producto-servicio-almacen-10-node/:id',multiPartMiddleware,appController.subirImagenesProductoServicioAlmacen10Node)
+          this.router.post('/subir-imagenes-producto-servicio-almacen-20-node/:id',multiPartMiddleware,appController.subirImagenesProductoServicioAlmacen20Node)
+          this.router.post('/subir-imagenes-producto-servicio-almacen-30-node/:id',multiPartMiddleware,appController.subirImagenesProductoServicioAlmacen30Node)
+
+
           this.router.post('/subir-imagen-producto-server',multiPartMiddlewareProducto,appController.subirImagenProductoServer)
           this.router.post('/subir-imagen-servicio-server',multiPartMiddlewareServicio,appController.subirImagenServicioServer)
           this.router.post('/send-email-solicitud-producto',multiPartMiddlewareServicio,appController.sendEmailSolicitudProducto)
