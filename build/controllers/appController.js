@@ -673,12 +673,30 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            const cabecera = req.files.cabecera[0].originalFilename;
-            const cabecera2 = req.files.cabecera2[0].originalFilename;
-            const cabecera3 = req.files.cabecera3[0].originalFilename;
-            const rutacabecera = req.files.cabecera[0].path;
-            const rutacabecera2 = req.files.cabecera2[0].path;
-            const rutacabecera3 = req.files.cabecera3[0].path;
+            var cabeceravar;
+            var rutacabeceravar;
+            var cabeceravar2;
+            var rutacabeceravar2;
+            var cabeceravar3;
+            var rutacabeceravar3;
+            if (req.files.cabecera != undefined) {
+                cabeceravar = req.files.cabecera[0].originalFilename;
+                rutacabeceravar = req.files.cabecera[0].path;
+            }
+            if (req.files.cabecera2 != undefined) {
+                cabeceravar2 = req.files.cabecera2[0].originalFilename;
+                rutacabeceravar2 = req.files.cabecera2[0].path;
+            }
+            if (req.files.cabecera3 != undefined) {
+                cabeceravar3 = req.files.cabecera3[0].originalFilename;
+                rutacabeceravar3 = req.files.cabecera3[0].path;
+            }
+            const cabecera = cabeceravar;
+            const rutacabecera = rutacabeceravar;
+            const cabecera2 = cabeceravar2;
+            const rutacabecera2 = rutacabeceravar2;
+            const cabecera3 = cabeceravar3;
+            const rutacabecera3 = rutacabeceravar3;
             const idPyme = req.params.id;
             var contentHTML;
             contentHTML = `
@@ -701,6 +719,7 @@ class AppController {
             });
             let mailOptions = {
                 from: 'productochileoficial@gmail.com',
+                // to: 'solicitudonepage@productochile.cl',
                 to: 'solicitudonepage@productochile.cl',
                 subject: 'solicitud one page pyme id=' + idPyme,
                 text: contentHTML,
@@ -738,15 +757,45 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            const caracteristica = req.files.caracteristica[0].originalFilename;
-            const caracteristica2 = req.files.caracteristica2[0].originalFilename;
-            const caracteristica3 = req.files.caracteristica3[0].originalFilename;
-            const rutacaracteristica = req.files.caracteristica[0].path;
-            const rutacaracteristica2 = req.files.caracteristica2[0].path;
-            const rutacaracteristica3 = req.files.caracteristica3[0].path;
-            const infoCaracteristica = req.body.infoCaracteristica[0];
-            const infoCaracteristica2 = req.body.infoCaracteristica2[0];
-            const infoCaracteristica3 = req.body.infoCaracteristica3[0];
+            var caracteristicavar;
+            var caracteristica2var;
+            var caracteristica3var;
+            var rutacaracteristicavar;
+            var rutacaracteristica2var;
+            var rutacaracteristica3var;
+            var infoCaracteristicavar;
+            var infoCaracteristica2var;
+            var infoCaracteristica3var;
+            if (req.files.caracteristica != undefined) {
+                caracteristicavar = req.files.caracteristica[0].originalFilename;
+                rutacaracteristicavar = req.files.caracteristica[0].path;
+            }
+            if (req.files.caracteristica2 != undefined) {
+                caracteristica2var = req.files.caracteristica2[0].originalFilename;
+                rutacaracteristica2var = req.files.caracteristica2[0].path;
+            }
+            if (req.files.caracteristica3 != undefined) {
+                caracteristica3var = req.files.caracteristica3[0].originalFilename;
+                rutacaracteristica3var = req.files.caracteristica3[0].path;
+            }
+            if (req.body.infoCaracteristica != undefined) {
+                infoCaracteristicavar = req.body.infoCaracteristica[0];
+            }
+            if (req.body.infoCaracteristica2 != undefined) {
+                infoCaracteristica2var = req.body.infoCaracteristica2[0];
+            }
+            if (req.body.infoCaracteristica3 != undefined) {
+                infoCaracteristica3var = req.body.infoCaracteristica3[0];
+            }
+            const caracteristica = caracteristicavar;
+            const caracteristica2 = caracteristica2var;
+            const caracteristica3 = caracteristica3var;
+            const rutacaracteristica = rutacaracteristicavar;
+            const rutacaracteristica2 = rutacaracteristica2var;
+            const rutacaracteristica3 = rutacaracteristica3var;
+            const infoCaracteristica = infoCaracteristicavar;
+            const infoCaracteristica2 = infoCaracteristica2var;
+            const infoCaracteristica3 = infoCaracteristica3var;
             const idPyme = req.params.id;
             var contentHTML;
             contentHTML = `
@@ -806,9 +855,19 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            const pyme = req.files.pyme[0].originalFilename;
-            const rutapyme = req.files.pyme[0].path;
-            const infopyme = req.body.infoPyme[0];
+            var pymevar;
+            var rutapymevar;
+            var infopymevar;
+            if (req.files.pyme != undefined) {
+                pymevar = req.files.pyme[0].originalFilename;
+                rutapymevar = req.files.pyme[0].path;
+            }
+            if (req.body.infoPyme != undefined) {
+                infopymevar = req.body.infoPyme[0];
+            }
+            const pyme = pymevar;
+            const rutapyme = rutapymevar;
+            const infopyme = infopymevar;
             const idPyme = req.params.id;
             var contentHTML;
             contentHTML = `
@@ -856,33 +915,123 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            const prodServ = req.files.ps[0].originalFilename;
-            const prodServ2 = req.files.ps2[0].originalFilename;
-            const prodServ3 = req.files.ps3[0].originalFilename;
-            const prodServ4 = req.files.ps4[0].originalFilename;
-            const prodServ5 = req.files.ps5[0].originalFilename;
-            const prodServ6 = req.files.ps6[0].originalFilename;
-            const prodServ7 = req.files.ps7[0].originalFilename;
-            const prodServ8 = req.files.ps8[0].originalFilename;
-            const prodServ9 = req.files.ps9[0].originalFilename;
-            const rutaprodServ = req.files.ps[0].path;
-            const rutaprodServ2 = req.files.ps2[0].path;
-            const rutaprodServ3 = req.files.ps3[0].path;
-            const rutaprodServ4 = req.files.ps4[0].path;
-            const rutaprodServ5 = req.files.ps5[0].path;
-            const rutaprodServ6 = req.files.ps6[0].path;
-            const rutaprodServ7 = req.files.ps7[0].path;
-            const rutaprodServ8 = req.files.ps8[0].path;
-            const rutaprodServ9 = req.files.ps9[0].path;
-            const infoprodserv = req.body.infoPS[0];
-            const infoprodserv2 = req.body.infoPS2[0];
-            const infoprodserv3 = req.body.infoPS3[0];
-            const infoprodserv4 = req.body.infoPS4[0];
-            const infoprodserv5 = req.body.infoPS5[0];
-            const infoprodserv6 = req.body.infoPS6[0];
-            const infoprodserv7 = req.body.infoPS7[0];
-            const infoprodserv8 = req.body.infoPS8[0];
-            const infoprodserv9 = req.body.infoPS9[0];
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
             const idPyme = req.params.id;
             var contentHTML;
             contentHTML = `
@@ -979,36 +1128,166 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            const prodServ = req.files.ps[0].originalFilename;
-            const prodServ2 = req.files.ps2[0].originalFilename;
-            const prodServ3 = req.files.ps3[0].originalFilename;
-            const prodServ4 = req.files.ps4[0].originalFilename;
-            const prodServ5 = req.files.ps5[0].originalFilename;
-            const prodServ6 = req.files.ps6[0].originalFilename;
-            const prodServ7 = req.files.ps7[0].originalFilename;
-            const prodServ8 = req.files.ps8[0].originalFilename;
-            const prodServ9 = req.files.ps9[0].originalFilename;
-            const prodServ10 = req.files.ps10[0].originalFilename;
-            const rutaprodServ = req.files.ps[0].path;
-            const rutaprodServ2 = req.files.ps2[0].path;
-            const rutaprodServ3 = req.files.ps3[0].path;
-            const rutaprodServ4 = req.files.ps4[0].path;
-            const rutaprodServ5 = req.files.ps5[0].path;
-            const rutaprodServ6 = req.files.ps6[0].path;
-            const rutaprodServ7 = req.files.ps7[0].path;
-            const rutaprodServ8 = req.files.ps8[0].path;
-            const rutaprodServ9 = req.files.ps9[0].path;
-            const rutaprodServ10 = req.files.ps9[0].path;
-            const infoprodserv = req.body.infoPS[0];
-            const infoprodserv2 = req.body.infoPS2[0];
-            const infoprodserv3 = req.body.infoPS3[0];
-            const infoprodserv4 = req.body.infoPS4[0];
-            const infoprodserv5 = req.body.infoPS5[0];
-            const infoprodserv6 = req.body.infoPS6[0];
-            const infoprodserv7 = req.body.infoPS7[0];
-            const infoprodserv8 = req.body.infoPS8[0];
-            const infoprodserv9 = req.body.infoPS9[0];
-            const infoprodserv10 = req.body.infoPS10[0];
+            // const prodServ = req.files.ps[0].originalFilename;
+            // const prodServ2 = req.files.ps2[0].originalFilename;
+            // const prodServ3 = req.files.ps3[0].originalFilename;
+            // const prodServ4 = req.files.ps4[0].originalFilename;
+            // const prodServ5 = req.files.ps5[0].originalFilename;
+            // const prodServ6 = req.files.ps6[0].originalFilename;
+            // const prodServ7 = req.files.ps7[0].originalFilename;
+            // const prodServ8 = req.files.ps8[0].originalFilename;
+            // const prodServ9 = req.files.ps9[0].originalFilename;
+            // const prodServ10 = req.files.ps10[0].originalFilename;
+            // const rutaprodServ = req.files.ps[0].path;
+            // const rutaprodServ2 = req.files.ps2[0].path;
+            // const rutaprodServ3 = req.files.ps3[0].path;
+            // const rutaprodServ4 = req.files.ps4[0].path;
+            // const rutaprodServ5 = req.files.ps5[0].path;
+            // const rutaprodServ6 = req.files.ps6[0].path;
+            // const rutaprodServ7 = req.files.ps7[0].path;
+            // const rutaprodServ8 = req.files.ps8[0].path;
+            // const rutaprodServ9 = req.files.ps9[0].path;
+            // const rutaprodServ10 = req.files.ps9[0].path;
+            // const infoprodserv = req.body.infoPS[0];
+            // const infoprodserv2 = req.body.infoPS2[0];
+            // const infoprodserv3 = req.body.infoPS3[0];
+            // const infoprodserv4 = req.body.infoPS4[0];
+            // const infoprodserv5 = req.body.infoPS5[0];
+            // const infoprodserv6 = req.body.infoPS6[0];
+            // const infoprodserv7 = req.body.infoPS7[0];
+            // const infoprodserv8 = req.body.infoPS8[0];
+            // const infoprodserv9 = req.body.infoPS9[0];
+            // const infoprodserv10 = req.body.infoPS10[0];
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var prodServ10var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var rutaprodServ10var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            var infoprodserv10var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.files.ps10 != undefined) {
+                prodServ10var = req.files.ps10[0].originalFilename;
+                rutaprodServ10var = req.files.ps10[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            if (req.body.infoPS10 != undefined) {
+                infoprodserv10var = req.body.infoPS10[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const prodServ10 = prodServ10var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const rutaprodServ10 = rutaprodServ10var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
+            const infoprodserv10 = infoprodserv10var;
             const idPyme = req.params.id;
             var contentHTML;
             contentHTML = `
@@ -1109,36 +1388,166 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            const prodServ = req.files.ps[0].originalFilename;
-            const prodServ2 = req.files.ps2[0].originalFilename;
-            const prodServ3 = req.files.ps3[0].originalFilename;
-            const prodServ4 = req.files.ps4[0].originalFilename;
-            const prodServ5 = req.files.ps5[0].originalFilename;
-            const prodServ6 = req.files.ps6[0].originalFilename;
-            const prodServ7 = req.files.ps7[0].originalFilename;
-            const prodServ8 = req.files.ps8[0].originalFilename;
-            const prodServ9 = req.files.ps9[0].originalFilename;
-            const prodServ10 = req.files.ps10[0].originalFilename;
-            const rutaprodServ = req.files.ps[0].path;
-            const rutaprodServ2 = req.files.ps2[0].path;
-            const rutaprodServ3 = req.files.ps3[0].path;
-            const rutaprodServ4 = req.files.ps4[0].path;
-            const rutaprodServ5 = req.files.ps5[0].path;
-            const rutaprodServ6 = req.files.ps6[0].path;
-            const rutaprodServ7 = req.files.ps7[0].path;
-            const rutaprodServ8 = req.files.ps8[0].path;
-            const rutaprodServ9 = req.files.ps9[0].path;
-            const rutaprodServ10 = req.files.ps10[0].path;
-            const infoprodserv = req.body.infoPS[0];
-            const infoprodserv2 = req.body.infoPS2[0];
-            const infoprodserv3 = req.body.infoPS3[0];
-            const infoprodserv4 = req.body.infoPS4[0];
-            const infoprodserv5 = req.body.infoPS5[0];
-            const infoprodserv6 = req.body.infoPS6[0];
-            const infoprodserv7 = req.body.infoPS7[0];
-            const infoprodserv8 = req.body.infoPS8[0];
-            const infoprodserv9 = req.body.infoPS9[0];
-            const infoprodserv10 = req.body.infoPS10[0];
+            // const prodServ = req.files.ps[0].originalFilename;
+            // const prodServ2 = req.files.ps2[0].originalFilename;
+            // const prodServ3 = req.files.ps3[0].originalFilename;
+            // const prodServ4 = req.files.ps4[0].originalFilename;
+            // const prodServ5 = req.files.ps5[0].originalFilename;
+            // const prodServ6 = req.files.ps6[0].originalFilename;
+            // const prodServ7 = req.files.ps7[0].originalFilename;
+            // const prodServ8 = req.files.ps8[0].originalFilename;
+            // const prodServ9 = req.files.ps9[0].originalFilename;
+            // const prodServ10 = req.files.ps10[0].originalFilename;
+            // const rutaprodServ = req.files.ps[0].path;
+            // const rutaprodServ2 = req.files.ps2[0].path;
+            // const rutaprodServ3 = req.files.ps3[0].path;
+            // const rutaprodServ4 = req.files.ps4[0].path;
+            // const rutaprodServ5 = req.files.ps5[0].path;
+            // const rutaprodServ6 = req.files.ps6[0].path;
+            // const rutaprodServ7 = req.files.ps7[0].path;
+            // const rutaprodServ8 = req.files.ps8[0].path;
+            // const rutaprodServ9 = req.files.ps9[0].path;
+            // const rutaprodServ10 = req.files.ps10[0].path;
+            // const infoprodserv = req.body.infoPS[0];
+            // const infoprodserv2 = req.body.infoPS2[0];
+            // const infoprodserv3 = req.body.infoPS3[0];
+            // const infoprodserv4 = req.body.infoPS4[0];
+            // const infoprodserv5 = req.body.infoPS5[0];
+            // const infoprodserv6 = req.body.infoPS6[0];
+            // const infoprodserv7 = req.body.infoPS7[0];
+            // const infoprodserv8 = req.body.infoPS8[0];
+            // const infoprodserv9 = req.body.infoPS9[0];
+            // const infoprodserv10 = req.body.infoPS10[0];
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var prodServ10var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var rutaprodServ10var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            var infoprodserv10var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.files.ps10 != undefined) {
+                prodServ10var = req.files.ps10[0].originalFilename;
+                rutaprodServ10var = req.files.ps10[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            if (req.body.infoPS10 != undefined) {
+                infoprodserv10var = req.body.infoPS10[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const prodServ10 = prodServ10var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const rutaprodServ10 = rutaprodServ10var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
+            const infoprodserv10 = infoprodserv10var;
             const idPyme = req.params.id;
             var contentHTML;
             contentHTML = `
@@ -1239,36 +1648,166 @@ class AppController {
             console.log(req.body);
             console.log('files');
             console.log(req.files);
-            const prodServ = req.files.ps[0].originalFilename;
-            const prodServ2 = req.files.ps2[0].originalFilename;
-            const prodServ3 = req.files.ps3[0].originalFilename;
-            const prodServ4 = req.files.ps4[0].originalFilename;
-            const prodServ5 = req.files.ps5[0].originalFilename;
-            const prodServ6 = req.files.ps6[0].originalFilename;
-            const prodServ7 = req.files.ps7[0].originalFilename;
-            const prodServ8 = req.files.ps8[0].originalFilename;
-            const prodServ9 = req.files.ps9[0].originalFilename;
-            const prodServ10 = req.files.ps10[0].originalFilename;
-            const rutaprodServ = req.files.ps[0].path;
-            const rutaprodServ2 = req.files.ps2[0].path;
-            const rutaprodServ3 = req.files.ps3[0].path;
-            const rutaprodServ4 = req.files.ps4[0].path;
-            const rutaprodServ5 = req.files.ps5[0].path;
-            const rutaprodServ6 = req.files.ps6[0].path;
-            const rutaprodServ7 = req.files.ps7[0].path;
-            const rutaprodServ8 = req.files.ps8[0].path;
-            const rutaprodServ9 = req.files.ps9[0].path;
-            const rutaprodServ10 = req.files.ps10[0].path;
-            const infoprodserv = req.body.infoPS[0];
-            const infoprodserv2 = req.body.infoPS2[0];
-            const infoprodserv3 = req.body.infoPS3[0];
-            const infoprodserv4 = req.body.infoPS4[0];
-            const infoprodserv5 = req.body.infoPS5[0];
-            const infoprodserv6 = req.body.infoPS6[0];
-            const infoprodserv7 = req.body.infoPS7[0];
-            const infoprodserv8 = req.body.infoPS8[0];
-            const infoprodserv9 = req.body.infoPS9[0];
-            const infoprodserv10 = req.body.infoPS10[0];
+            // const prodServ = req.files.ps[0].originalFilename;
+            // const prodServ2 = req.files.ps2[0].originalFilename;
+            // const prodServ3 = req.files.ps3[0].originalFilename;
+            // const prodServ4 = req.files.ps4[0].originalFilename;
+            // const prodServ5 = req.files.ps5[0].originalFilename;
+            // const prodServ6 = req.files.ps6[0].originalFilename;
+            // const prodServ7 = req.files.ps7[0].originalFilename;
+            // const prodServ8 = req.files.ps8[0].originalFilename;
+            // const prodServ9 = req.files.ps9[0].originalFilename;
+            // const prodServ10 = req.files.ps10[0].originalFilename;
+            // const rutaprodServ = req.files.ps[0].path;
+            // const rutaprodServ2 = req.files.ps2[0].path;
+            // const rutaprodServ3 = req.files.ps3[0].path;
+            // const rutaprodServ4 = req.files.ps4[0].path;
+            // const rutaprodServ5 = req.files.ps5[0].path;
+            // const rutaprodServ6 = req.files.ps6[0].path;
+            // const rutaprodServ7 = req.files.ps7[0].path;
+            // const rutaprodServ8 = req.files.ps8[0].path;
+            // const rutaprodServ9 = req.files.ps9[0].path;
+            // const rutaprodServ10 = req.files.ps10[0].path;
+            // const infoprodserv = req.body.infoPS[0];
+            // const infoprodserv2 = req.body.infoPS2[0];
+            // const infoprodserv3 = req.body.infoPS3[0];
+            // const infoprodserv4 = req.body.infoPS4[0];
+            // const infoprodserv5 = req.body.infoPS5[0];
+            // const infoprodserv6 = req.body.infoPS6[0];
+            // const infoprodserv7 = req.body.infoPS7[0];
+            // const infoprodserv8 = req.body.infoPS8[0];
+            // const infoprodserv9 = req.body.infoPS9[0];
+            // const infoprodserv10 = req.body.infoPS10[0];
+            var prodServvar;
+            var prodServ2var;
+            var prodServ3var;
+            var prodServ4var;
+            var prodServ5var;
+            var prodServ6var;
+            var prodServ7var;
+            var prodServ8var;
+            var prodServ9var;
+            var prodServ10var;
+            var rutaprodServvar;
+            var rutaprodServ2var;
+            var rutaprodServ3var;
+            var rutaprodServ4var;
+            var rutaprodServ5var;
+            var rutaprodServ6var;
+            var rutaprodServ7var;
+            var rutaprodServ8var;
+            var rutaprodServ9var;
+            var rutaprodServ10var;
+            var infoprodservvar;
+            var infoprodserv2var;
+            var infoprodserv3var;
+            var infoprodserv4var;
+            var infoprodserv5var;
+            var infoprodserv6var;
+            var infoprodserv7var;
+            var infoprodserv8var;
+            var infoprodserv9var;
+            var infoprodserv10var;
+            if (req.files.ps != undefined) {
+                prodServvar = req.files.ps[0].originalFilename;
+                rutaprodServvar = req.files.ps[0].path;
+            }
+            if (req.files.ps2 != undefined) {
+                prodServ2var = req.files.ps2[0].originalFilename;
+                rutaprodServ2var = req.files.ps2[0].path;
+            }
+            if (req.files.ps3 != undefined) {
+                prodServ3var = req.files.ps3[0].originalFilename;
+                rutaprodServ3var = req.files.ps3[0].path;
+            }
+            if (req.files.ps4 != undefined) {
+                prodServ4var = req.files.ps4[0].originalFilename;
+                rutaprodServ4var = req.files.ps4[0].path;
+            }
+            if (req.files.ps5 != undefined) {
+                prodServ5var = req.files.ps5[0].originalFilename;
+                rutaprodServ5var = req.files.ps5[0].path;
+            }
+            if (req.files.ps6 != undefined) {
+                prodServ6var = req.files.ps6[0].originalFilename;
+                rutaprodServ6var = req.files.ps6[0].path;
+            }
+            if (req.files.ps7 != undefined) {
+                prodServ7var = req.files.ps7[0].originalFilename;
+                rutaprodServ7var = req.files.ps7[0].path;
+            }
+            if (req.files.ps8 != undefined) {
+                prodServ8var = req.files.ps8[0].originalFilename;
+                rutaprodServ8var = req.files.ps8[0].path;
+            }
+            if (req.files.ps9 != undefined) {
+                prodServ9var = req.files.ps9[0].originalFilename;
+                rutaprodServ9var = req.files.ps9[0].path;
+            }
+            if (req.files.ps10 != undefined) {
+                prodServ10var = req.files.ps10[0].originalFilename;
+                rutaprodServ10var = req.files.ps10[0].path;
+            }
+            if (req.body.infoPS != undefined) {
+                infoprodservvar = req.body.infoPS[0];
+            }
+            if (req.body.infoPS2 != undefined) {
+                infoprodserv2var = req.body.infoPS2[0];
+            }
+            if (req.body.infoPS3 != undefined) {
+                infoprodserv3var = req.body.infoPS3[0];
+            }
+            if (req.body.infoPS4 != undefined) {
+                infoprodserv4var = req.body.infoPS4[0];
+            }
+            if (req.body.infoPS5 != undefined) {
+                infoprodserv5var = req.body.infoPS5[0];
+            }
+            if (req.body.infoPS6 != undefined) {
+                infoprodserv6var = req.body.infoPS6[0];
+            }
+            if (req.body.infoPS7 != undefined) {
+                infoprodserv7var = req.body.infoPS7[0];
+            }
+            if (req.body.infoPS8 != undefined) {
+                infoprodserv8var = req.body.infoPS8[0];
+            }
+            if (req.body.infoPS9 != undefined) {
+                infoprodserv9var = req.body.infoPS9[0];
+            }
+            if (req.body.infoPS10 != undefined) {
+                infoprodserv10var = req.body.infoPS10[0];
+            }
+            const prodServ = prodServvar;
+            const prodServ2 = prodServ2var;
+            const prodServ3 = prodServ3var;
+            const prodServ4 = prodServ4var;
+            const prodServ5 = prodServ5var;
+            const prodServ6 = prodServ6var;
+            const prodServ7 = prodServ7var;
+            const prodServ8 = prodServ8var;
+            const prodServ9 = prodServ9var;
+            const prodServ10 = prodServ10var;
+            const rutaprodServ = rutaprodServvar;
+            const rutaprodServ2 = rutaprodServ2var;
+            const rutaprodServ3 = rutaprodServ3var;
+            const rutaprodServ4 = rutaprodServ4var;
+            const rutaprodServ5 = rutaprodServ5var;
+            const rutaprodServ6 = rutaprodServ6var;
+            const rutaprodServ7 = rutaprodServ7var;
+            const rutaprodServ8 = rutaprodServ8var;
+            const rutaprodServ9 = rutaprodServ9var;
+            const rutaprodServ10 = rutaprodServ10var;
+            const infoprodserv = infoprodservvar;
+            const infoprodserv2 = infoprodserv2var;
+            const infoprodserv3 = infoprodserv3var;
+            const infoprodserv4 = infoprodserv4var;
+            const infoprodserv5 = infoprodserv5var;
+            const infoprodserv6 = infoprodserv6var;
+            const infoprodserv7 = infoprodserv7var;
+            const infoprodserv8 = infoprodserv8var;
+            const infoprodserv9 = infoprodserv9var;
+            const infoprodserv10 = infoprodserv10var;
             const idPyme = req.params.id;
             var contentHTML;
             contentHTML = `
