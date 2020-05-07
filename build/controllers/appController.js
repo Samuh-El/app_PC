@@ -18,6 +18,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 class AppController {
+    //metodos de practica
     list(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const data = yield database_1.default.query('SELECT * FROM `pyme`,`usuario-administrador`');
@@ -50,6 +51,7 @@ class AppController {
             res.json({ text: "game delete.." });
         });
     }
+    //metodos de practica
     updateDatosEmpresariales(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { idPyme } = req.body;
@@ -331,7 +333,7 @@ class AppController {
             console.log('getProductosServiciosPorNombre metodo en node bla');
             const { nombre } = req.body;
             console.log(nombre);
-            const productosServicios = yield database_1.default.query('SELECT idProducto as id,idPyme,nombreProducto as nombre,valorProducto as valor,cantidadProducto as cantidad,idTipos_Servicios_Productos,cantidad_like_producto as likes,cantidad_dislike_producto as dislikes,rutaImagenProducto as rutaImagen,Producto FROM `producto` where Habilitado=1 and nombreProducto like \'%' + nombre + '%\' UNION ALL SELECT idServicio,idPyme,nombreServicio,valorServicio,0,idTipos_Servicios_Productos,cantidad_like_servicio,cantidad_dislike_servicio,rutaImagenServicio,Producto FROM `servicio` where Habilitado=1 and nombreServicio like \'%' + nombre + '%\'');
+            const productosServicios = yield database_1.default.query('SELECT idProducto as id,idPyme,nombreProducto as nombre,valorProducto as valor,cantidadProducto as cantidad,idTipos_Servicios_Productos,cantidad_like_producto as likes,cantidad_dislike_producto as dislikes,rutaImagenProducto as rutaImagen,Producto FROM `producto` where Habilitado=1 and LOWER(nombreProducto) like \'%' + nombre + '%\' UNION ALL SELECT idServicio,idPyme,nombreServicio,valorServicio,0,idTipos_Servicios_Productos,cantidad_like_servicio,cantidad_dislike_servicio,rutaImagenServicio,Producto FROM `servicio` where Habilitado=1 and LOWER(nombreServicio) like \'%' + nombre + '%\'');
             console.log('productosServicios= ' + productosServicios);
             res.json(productosServicios);
         });
@@ -385,8 +387,8 @@ class AppController {
                 where += " and re.nombreRegion=\'" + region + '\'';
             }
             if (nombre != '' && nombre != undefined) {
-                nombreProducto = " and p.nombreProducto LIKE \'%" + nombre + '%\'';
-                nombreServicio = " and s.nombreServicio LIKE \'%" + nombre + '%\'';
+                nombreProducto = " and LOWER(p.nombreProducto) LIKE \'%" + nombre + '%\'';
+                nombreServicio = " and LOWER(s.nombreServicio) LIKE \'%" + nombre + '%\'';
             }
             console.log('where= ' + where);
             console.log('valor= ' + valor);
