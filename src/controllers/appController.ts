@@ -464,9 +464,14 @@ class AppController {
           console.log('productoServicio= ' + productoServicio)
 
           if (productoServicio.length > 0) {
+               console.log('viene un producto o servicio')
                return res.json(productoServicio[0]);
+               
+          }else{
+               console.log('no viene nada')
+               return res.json({ text: "productoServicio no existe en db" })
           }
-          return res.json({ text: "productoServicio no existe en db" })
+              
      }
 
 
@@ -481,9 +486,13 @@ class AppController {
           console.log('productoServicio= ' + productoServicio)
 
           if (productoServicio.length > 0) {
+               console.log('viene un producto o servicio')
                return res.json(productoServicio[0]);
+          }else{
+               console.log('no viene nada')
+               return res.json({ text: "no existen productos de este rubro" })
           }
-          return res.json({ text: "no existen productos de este rubro" })
+          
      }
 
 

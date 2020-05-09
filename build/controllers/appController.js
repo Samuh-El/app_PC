@@ -435,9 +435,13 @@ class AppController {
             const productoServicio = yield database_1.default.query(consulta, [req.params.id]);
             console.log('productoServicio= ' + productoServicio);
             if (productoServicio.length > 0) {
+                console.log('viene un producto o servicio');
                 return res.json(productoServicio[0]);
             }
-            return res.json({ text: "productoServicio no existe en db" });
+            else {
+                console.log('no viene nada');
+                return res.json({ text: "productoServicio no existe en db" });
+            }
         });
     }
     getProductoServicioFromHome(req, res) {
@@ -450,9 +454,13 @@ class AppController {
             const productoServicio = yield database_1.default.query(consulta);
             console.log('productoServicio= ' + productoServicio);
             if (productoServicio.length > 0) {
+                console.log('viene un producto o servicio');
                 return res.json(productoServicio[0]);
             }
-            return res.json({ text: "no existen productos de este rubro" });
+            else {
+                console.log('no viene nada');
+                return res.json({ text: "no existen productos de este rubro" });
+            }
         });
     }
     subirImagenNode(req, res) {
