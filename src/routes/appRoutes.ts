@@ -71,6 +71,7 @@ class AppRoutes {
           this.router.post('/send-email-solicitud-servicio',multiPartMiddlewareServicio,appController.sendEmailSolicitudServicio)
           
           this.router.get('/get-pymes-por-entidad/:id', appController.getPymesPorEntidad);
+          this.router.get('/get-entidades', appController.getEntidades);
      }
 }
 
