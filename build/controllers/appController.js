@@ -335,11 +335,13 @@ class AppController {
             console.log('nombre= ' + nombre);
             console.log('pais= ' + pais);
             var idPais = '1';
+            if (pais == 'chile') {
+                idPais = '1';
+            }
             if (pais == 'peru') {
                 idPais = '2';
             }
-            const productosServicios = yield database_1.default.query('SELECT pr.idProducto as id,pr.idPyme,pr.nombreProducto as nombre,pr.valorProducto as valor,pr.cantidadProducto as cantidad,pr.idTipos_Servicios_Productos,pr.cantidad_like_producto as likes,pr.cantidad_dislike_producto as dislikes,pr.rutaImagenProducto as rutaImagen,pr.Producto,re.idPais as idPais FROM `producto` as pr INNER JOIN `pyme` as py ON pr.idPyme = py.idPyme INNER JOIN `region` as re ON py.idRegion = re.idRegion where Habilitado=1 and LOWER(nombreProducto) like \'%' + nombre + '%\' UNION ALL SELECT se.idServicio,se.idPyme,se.nombreServicio,se.valorServicio,0,se.idTipos_Servicios_Productos,se.cantidad_like_servicio,se.cantidad_dislike_servicio,se.rutaImagenServicio,se.Producto,re.idPais as idPais FROM `servicio` as se INNER JOIN `pyme` as py ON se.idPyme = py.idPyme INNER JOIN `region` as re ON py.idRegion = re.idRegion where Habilitado=1 and LOWER(nombreServicio) like \'%' + nombre + '%\'');
-            console.log('productosServicios= ' + productosServicios);
+            const productosServicios = yield database_1.default.query('SELECT pr.idProducto as id,pr.idPyme,pr.nombreProducto as nombre,pr.valorProducto as valor,pr.cantidadProducto as cantidad,pr.idTipos_Servicios_Productos,pr.cantidad_like_producto as likes,pr.cantidad_dislike_producto as dislikes,pr.rutaImagenProducto as rutaImagen,pr.Producto,re.idPais as idPais FROM `producto` as pr INNER JOIN `pyme` as py ON pr.idPyme = py.idPyme INNER JOIN `region` as re ON py.idRegion = re.idRegion where Habilitado=1 and LOWER(nombreProducto) like \'%' + nombre + '%\' and re.idPais = ' + idPais + ' UNION ALL SELECT se.idServicio,se.idPyme,se.nombreServicio,se.valorServicio,0,se.idTipos_Servicios_Productos,se.cantidad_like_servicio,se.cantidad_dislike_servicio,se.rutaImagenServicio,se.Producto,re.idPais as idPais FROM `servicio` as se INNER JOIN `pyme` as py ON se.idPyme = py.idPyme INNER JOIN `region` as re ON py.idRegion = re.idRegion where Habilitado=1 and LOWER(nombreServicio) like \'%' + nombre + '%\' and re.idPais = ' + idPais + '');
             res.json(productosServicios);
         });
     }
@@ -361,13 +363,14 @@ class AppController {
             var nombreProducto = "";
             var nombreServicio = "";
             console.log('getProductosServiciosPorFiltros metodo en node bla');
-            const { rubro, region, precio, producto, servicio, nombre } = req.body;
+            const { rubro, region, precio, producto, servicio, nombre, pais } = req.body;
             console.log('nombre =' + nombre);
             console.log('producto =' + producto);
             console.log('servicio =' + servicio);
             console.log('precio =' + precio);
             console.log('region =' + region);
             console.log('rubro= ' + rubro);
+            console.log('pais= ' + pais);
             if (precio != "" && precio != undefined) {
                 if (precio == 'precio_all') {
                     valor = '-1';
@@ -389,14 +392,20 @@ class AppController {
                 }
             }
             if (rubro != '' && rubro != undefined && rubro != 'rubro_all') {
-                where += " and ru.nombreRubro=\'" + rubro + '\'';
+                where += " and ru.nombreRubro =\'" + rubro + '\'';
             }
             if (region != '' && region != undefined && region != "region_all") {
-                where += " and re.nombreRegion=\'" + region + '\'';
+                where += " and re.nombreRegion =\'" + region + '\'';
             }
             if (nombre != '' && nombre != undefined) {
                 nombreProducto = " and LOWER(p.nombreProducto) LIKE \'%" + nombre + '%\'';
                 nombreServicio = " and LOWER(s.nombreServicio) LIKE \'%" + nombre + '%\'';
+            }
+            if (pais == 'chile') {
+                where += " and re.idPais = 1";
+            }
+            if (pais == 'peru') {
+                where += " and re.idPais = 2";
             }
             console.log('where= ' + where);
             console.log('valor= ' + valor);
@@ -420,8 +429,8 @@ class AppController {
                     res.json({ text: "p y s false" });
                 }
             }
+            console.log(consulta);
             const productosServicios = yield database_1.default.query(consulta);
-            console.log('productosServicios= ' + productosServicios);
             res.json(productosServicios);
         });
     }
