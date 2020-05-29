@@ -6,7 +6,7 @@ export default{
           host:'190.107.177.34',
           user:'producto_Felipe', 
           password:']wq-8xIFvf26',
-          database:'producto_chile', 
+          database:'producto_chile',  
           
 
           //datos de conexion a localhost

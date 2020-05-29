@@ -331,9 +331,14 @@ class AppController {
     getProductosServiciosPorNombre(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log('getProductosServiciosPorNombre metodo en node bla');
-            const { nombre } = req.body;
-            console.log(nombre);
-            const productosServicios = yield database_1.default.query('SELECT idProducto as id,idPyme,nombreProducto as nombre,valorProducto as valor,cantidadProducto as cantidad,idTipos_Servicios_Productos,cantidad_like_producto as likes,cantidad_dislike_producto as dislikes,rutaImagenProducto as rutaImagen,Producto FROM `producto` where Habilitado=1 and LOWER(nombreProducto) like \'%' + nombre + '%\' UNION ALL SELECT idServicio,idPyme,nombreServicio,valorServicio,0,idTipos_Servicios_Productos,cantidad_like_servicio,cantidad_dislike_servicio,rutaImagenServicio,Producto FROM `servicio` where Habilitado=1 and LOWER(nombreServicio) like \'%' + nombre + '%\'');
+            const { nombre, pais } = req.body;
+            console.log('nombre= ' + nombre);
+            console.log('pais= ' + pais);
+            var idPais = '1';
+            if (pais == 'peru') {
+                idPais = '2';
+            }
+            const productosServicios = yield database_1.default.query('SELECT pr.idProducto as id,pr.idPyme,pr.nombreProducto as nombre,pr.valorProducto as valor,pr.cantidadProducto as cantidad,pr.idTipos_Servicios_Productos,pr.cantidad_like_producto as likes,pr.cantidad_dislike_producto as dislikes,pr.rutaImagenProducto as rutaImagen,pr.Producto,re.idPais as idPais FROM `producto` as pr INNER JOIN `pyme` as py ON pr.idPyme = py.idPyme INNER JOIN `region` as re ON py.idRegion = re.idRegion where Habilitado=1 and LOWER(nombreProducto) like \'%' + nombre + '%\' UNION ALL SELECT se.idServicio,se.idPyme,se.nombreServicio,se.valorServicio,0,se.idTipos_Servicios_Productos,se.cantidad_like_servicio,se.cantidad_dislike_servicio,se.rutaImagenServicio,se.Producto,re.idPais as idPais FROM `servicio` as se INNER JOIN `pyme` as py ON se.idPyme = py.idPyme INNER JOIN `region` as re ON py.idRegion = re.idRegion where Habilitado=1 and LOWER(nombreServicio) like \'%' + nombre + '%\'');
             console.log('productosServicios= ' + productosServicios);
             res.json(productosServicios);
         });
@@ -2055,7 +2060,16 @@ class AppController {
     }
     getEntidades(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = yield database_1.default.query('SELECT * FROM `entidad`');
+            console.log('getEntidades por pais');
+            console.log(req.params.pais);
+            //por defecto pais = 1, ya que chile es el pais 1 en la db
+            var pais = '1';
+            if (req.params.pais == 'peru') {
+                pais = '2';
+            }
+            console.log('pais= ' + pais);
+            console.log('query= SELECT * FROM `entidad` WHERE idPais= ' + pais);
+            const data = yield database_1.default.query('SELECT * FROM `entidad` WHERE idPais= ' + pais);
             res.json(data);
         });
     }

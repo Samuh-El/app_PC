@@ -62,7 +62,7 @@ class AppRoutes {
         this.router.post('/send-email-solicitud-producto', multiPartMiddlewareServicio, appController_1.default.sendEmailSolicitudProducto);
         this.router.post('/send-email-solicitud-servicio', multiPartMiddlewareServicio, appController_1.default.sendEmailSolicitudServicio);
         this.router.get('/get-pymes-por-entidad/:id', appController_1.default.getPymesPorEntidad);
-        this.router.get('/get-entidades', appController_1.default.getEntidades);
+        this.router.get('/get-entidades/:pais', appController_1.default.getEntidades);
     }
 }
 const appRoutes = new AppRoutes();
