@@ -6,9 +6,9 @@
   "engines": {
     "node": "12.16.x"
   },
-  "scripts": {
-    
-    "start": "node build/index.js"   
+  "scripts": { 
+    "build":"tsc -w",
+    "start": "nodemon build/index.js"   
   },
   "keywords": [],
   "author": "",
