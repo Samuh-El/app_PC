@@ -99,13 +99,35 @@ class AppController {
     }
     sendEmailUser(req, res) {
         var contentHTML;
-        const { nombre, correo, mensaje } = req.body;
-        contentHTML = `
-          Informacion de usuario de Productos Chile
-          Nombre: ${nombre}
-          Correo: ${correo}
-          Mensaje: ${mensaje}
-         `;
+        var correoDestino = '';
+        const { nombre, correo, mensaje, pais } = req.body;
+        if (pais == 'chile') {
+            contentHTML = `
+     Informacion de usuario de Producto Chile
+     Nombre: ${nombre}
+     Correo: ${correo}
+     Mensaje: ${mensaje}
+    `;
+            correoDestino = 'contacto@productochile.cl';
+        }
+        if (pais == 'colombia') {
+            contentHTML = `
+     Informacion de usuario de Producto Colombia
+     Nombre: ${nombre}
+     Correo: ${correo}
+     Mensaje: ${mensaje}
+    `;
+            correoDestino = 'gerencia@productocolombia.com.co';
+        }
+        if (pais == 'peru') {
+            contentHTML = `
+     Informacion de usuario de Producto Peru
+     Nombre: ${nombre}
+     Correo: ${correo}
+     Mensaje: ${mensaje}
+    `;
+            correoDestino = 'contacto@productoperu.com.pe';
+        }
         console.log(contentHTML);
         let transporter = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -119,7 +141,7 @@ class AppController {
         });
         let mailOptions = {
             from: 'productochileoficial@gmail.com',
-            to: 'contacto@productochile.cl',
+            to: correoDestino,
             subject: 'PC Usuario correo= ' + correo,
             text: contentHTML
         };
