@@ -92,13 +92,43 @@ class AppController {
 
      public sendEmailUser(req: Request, res: Response) {
           var contentHTML: any;
-          const { nombre, correo, mensaje } = req.body;
-          contentHTML = `
-          Informacion de usuario de Productos Chile
-          Nombre: ${nombre}
-          Correo: ${correo}
-          Mensaje: ${mensaje}
-         `
+          var correoDestino:string='';
+          const { nombre, correo, mensaje,pais } = req.body;
+
+
+if(pais=='chile'){
+     contentHTML = `
+     Informacion de usuario de Producto Chile
+     Nombre: ${nombre}
+     Correo: ${correo}
+     Mensaje: ${mensaje}
+    `
+    correoDestino='contacto@productochile.cl'
+}
+
+if(pais=='colombia'){
+     contentHTML = `
+     Informacion de usuario de Producto Colombia
+     Nombre: ${nombre}
+     Correo: ${correo}
+     Mensaje: ${mensaje}
+    `
+    correoDestino='gerencia@productocolombia.com.co'
+    
+}
+
+if(pais=='peru'){
+     contentHTML = `
+     Informacion de usuario de Producto Peru
+     Nombre: ${nombre}
+     Correo: ${correo}
+     Mensaje: ${mensaje}
+    `
+    correoDestino='contacto@productoperu.com.pe'
+    
+}
+
+       
           console.log(contentHTML)
 
           let transporter = nodemailer.createTransport({
@@ -114,10 +144,10 @@ class AppController {
 
           let mailOptions = {
                from: 'productochileoficial@gmail.com',
-               to: 'contacto@productochile.cl',
+               to: correoDestino,
                subject: 'PC Usuario correo= ' + correo, //este mensaje debe ir cambiando, asi no quedan todos juntos 
-               text: contentHTML
-          };
+               text: contentHTML 
+          }; 
 
           transporter.sendMail(mailOptions, (error: any, info: any) => {
                if (error) {
